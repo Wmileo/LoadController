@@ -35,15 +35,15 @@
     self.loadMore = [[LoadMoreController alloc] initWithScrollView:self.tableView];
     self.loadMore.delegate = self;
     
-    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, -100, 320, 100)];
+    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, -40, 320, 40)];
     view.backgroundColor = [UIColor lightGrayColor];
 
-    self.loadMore.loadBottomView = view;
-//    self.loadMore.loadTopView = view;
-//    self.loadMore.canAutoLoadTop = NO;
+//    self.loadMore.loadBottomView = view;
+    self.loadMore.loadTopView = view;
+    self.loadMore.canAutoLoadTop = NO;
 //    [self.loadMore showLoadTop];
 //    self.loadMore.loadTopView = nil;
-    [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(endLoading) userInfo:nil repeats:NO];
+//    [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(endLoading) userInfo:nil repeats:NO];
 
     // Do any additional setup after loading the view, typically from a nib.
 }
@@ -59,29 +59,29 @@
 
 #pragma mark - loadMore
 
--(void)loadMoreBottomAutoLoadFinish:(void (^)())finish{
-    [NSTimer scheduledTimerWithTimeInterval:0.5 target:self selector:@selector(loadFinishAuto:) userInfo:@{@"finish":finish} repeats:NO];
-}
-
--(void)loadMoreBottomLoadFinish:(void (^)())finish{
-    [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(loadFinish:) userInfo:@{@"finish":finish} repeats:NO];
-}
+//-(void)loadMoreBottomAutoLoadFinish:(void (^)())finish{
+//    [NSTimer scheduledTimerWithTimeInterval:0.5 target:self selector:@selector(loadFinishAuto:) userInfo:@{@"finish":finish} repeats:NO];
+//}
+//
+//-(void)loadMoreBottomLoadFinish:(void (^)())finish{
+//    [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(loadFinish:) userInfo:@{@"finish":finish} repeats:NO];
+//}
 
 //-(void)loadMoreTopAutoLoadFinish:(void (^)(CGFloat))finish{
 //    [NSTimer scheduledTimerWithTimeInterval:0.5 target:self selector:@selector(loadFinishAuto:) userInfo:@{@"finish":finish} repeats:NO];
 //}
 
-//-(void)loadMoreTopLoadFinish:(void (^)(CGFloat))finish{
-//    [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(loadFinish:) userInfo:@{@"finish":finish} repeats:NO];
-//}
+-(void)loadMoreTopLoadFinish:(void (^)(CGFloat))finish{
+    [NSTimer scheduledTimerWithTimeInterval:0 target:self selector:@selector(loadFinish:) userInfo:@{@"finish":finish} repeats:NO];
+}
 //
 -(void)loadFinishAuto:(id)info{
-    void (^finish)() = ((NSTimer *)info).userInfo[@"finish"];
+    void (^finish)(CGFloat) = ((NSTimer *)info).userInfo[@"finish"];
 
     if (self.num > 7) {
         self.loadMore.canAutoLoadBottom = NO;
         if (finish) {
-            finish();
+            finish(0);
         }
         return;
     }
@@ -89,18 +89,18 @@
     [self.tableView reloadData];
     [self.loadMore repositionLoadBottomView];
     if (finish) {
-        finish();
+        finish(0);
     }
 }
 //
 -(void)loadFinish:(id)info{
-    void (^finish)() = ((NSTimer *)info).userInfo[@"finish"];
+    void (^finish)(CGFloat) = ((NSTimer *)info).userInfo[@"finish"];
     self.num++;
     [self.tableView reloadData];
-    [self.loadMore repositionLoadBottomView];
+//    [self.loadMore repositionLoadBottomView];
     
     if (finish) {
-        finish();
+        finish(0);
     }
 }
 

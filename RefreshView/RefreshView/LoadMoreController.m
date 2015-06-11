@@ -12,7 +12,6 @@
 
 @property (nonatomic, strong) UIScrollView *scrollView;
 
-
 @end
 
 @implementation LoadMoreController
@@ -72,7 +71,7 @@
 -(void)disappearLoadTop{
     if (self.scrollView.contentInset.top != 0) {
         __weak __typeof(self) wself = self;
-        [UIView animateWithDuration:0.15 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^{
+        [UIView animateWithDuration:0.2 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^{
             wself.scrollView.contentInset = UIEdgeInsetsZero;
         } completion:^(BOOL finished) {
             wself.isLoading = NO;
@@ -99,7 +98,9 @@
                 inset.top = 0;
             }
         }
-        scrollView.contentInset = inset;
+        [UIView animateWithDuration:0.2 animations:^{
+            scrollView.contentInset = inset;
+        }];
     }else if (y+CGRectGetHeight(scrollView.frame) > scrollView.contentSize.height && self.loadBottomView) {//bottom
         y = y + CGRectGetHeight(scrollView.frame) - scrollView.contentSize.height;
         y = MIN(y, CGRectGetHeight(self.loadBottomView.frame));
@@ -113,7 +114,6 @@
 //                inset.bottom = 0;
             }
         }
-
         scrollView.contentInset = inset;
     }else if (scrollView.contentInset.top != 0 || scrollView.contentInset.bottom != 0){
         scrollView.contentInset = UIEdgeInsetsZero;
@@ -126,6 +126,7 @@
         !self.canAutoLoadTop &&
         y <= -CGRectGetHeight(self.loadTopView.frame)) {//top
         [self loadMoreTop];
+        NSLog(@"start");
     }else if (self.loadBottomView &&
               !self.canAutoLoadBottom &&
               (y + CGRectGetHeight(scrollView.frame)) >= (CGRectGetHeight(self.loadBottomView.frame) + scrollView.contentSize.height)) {//bottom
@@ -163,12 +164,14 @@
         [self.scrollView setContentOffset:offset];
         self.scrollView.contentInset = UIEdgeInsetsZero;
         self.isLoading = NO;
+        NSLog(@"f-0");
     }else if (top != 0) {
         __weak __typeof(self) wself = self;
-        [UIView animateWithDuration:0.15 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^{
+        [UIView animateWithDuration:0.2 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^{
             wself.scrollView.contentInset = UIEdgeInsetsZero;
         } completion:^(BOOL finished) {
             wself.isLoading = NO;
+            NSLog(@"f - h - 0");
         }];
     }else{
         self.isLoading = NO;
@@ -196,7 +199,7 @@
 }
 -(void)loadBottomFinish{
     __weak __typeof(self) wself = self;
-    [UIView animateWithDuration:0.15 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^{
+    [UIView animateWithDuration:0.2 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^{
         wself.scrollView.contentInset = UIEdgeInsetsZero;
     } completion:^(BOOL finished) {
         wself.isLoading = NO;
