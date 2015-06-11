@@ -14,6 +14,7 @@
 		7E3FEFD41B26E6610003ADD4 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7E3FEFD31B26E6610003ADD4 /* Images.xcassets */; };
 		7E3FEFD71B26E6610003ADD4 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7E3FEFD51B26E6610003ADD4 /* LaunchScreen.xib */; };
 		7E3FEFE31B26E6610003ADD4 /* RefreshViewTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E3FEFE21B26E6610003ADD4 /* RefreshViewTests.m */; };
+		7E3FEFF21B27DD390003ADD4 /* LoadMoreController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E3FEFF11B27DD390003ADD4 /* LoadMoreController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,6 +41,8 @@
 		7E3FEFDC1B26E6610003ADD4 /* RefreshViewTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RefreshViewTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		7E3FEFE11B26E6610003ADD4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7E3FEFE21B26E6610003ADD4 /* RefreshViewTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RefreshViewTests.m; sourceTree = "<group>"; };
+		7E3FEFF01B27DD390003ADD4 /* LoadMoreController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoadMoreController.h; sourceTree = "<group>"; };
+		7E3FEFF11B27DD390003ADD4 /* LoadMoreController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoadMoreController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -86,6 +89,7 @@
 				7E3FEFCD1B26E6610003ADD4 /* ViewController.h */,
 				7E3FEFCE1B26E6610003ADD4 /* ViewController.m */,
 				7E3FEFD01B26E6610003ADD4 /* Main.storyboard */,
+				7E3FEFEC1B26E8E00003ADD4 /* RefreshView */,
 				7E3FEFD31B26E6610003ADD4 /* Images.xcassets */,
 				7E3FEFD51B26E6610003ADD4 /* LaunchScreen.xib */,
 				7E3FEFC61B26E6610003ADD4 /* Supporting Files */,
@@ -117,6 +121,15 @@
 				7E3FEFE11B26E6610003ADD4 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		7E3FEFEC1B26E8E00003ADD4 /* RefreshView */ = {
+			isa = PBXGroup;
+			children = (
+				7E3FEFF01B27DD390003ADD4 /* LoadMoreController.h */,
+				7E3FEFF11B27DD390003ADD4 /* LoadMoreController.m */,
+			);
+			name = RefreshView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -221,6 +234,7 @@
 			files = (
 				7E3FEFCF1B26E6610003ADD4 /* ViewController.m in Sources */,
 				7E3FEFCC1B26E6610003ADD4 /* AppDelegate.m in Sources */,
+				7E3FEFF21B27DD390003ADD4 /* LoadMoreController.m in Sources */,
 				7E3FEFC91B26E6610003ADD4 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -348,6 +362,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = RefreshView/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -358,6 +373,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = RefreshView/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
