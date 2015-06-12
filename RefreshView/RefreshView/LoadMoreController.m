@@ -166,10 +166,12 @@
                 inset.top = 0;
             }
         }
-        __weak __typeof(self) wself = self;
-        [UIView animateWithDuration:0.2 animations:^{
-            wself.scrollView.contentInset = inset;
-        }];
+        if (inset.top != self.scrollView.contentInset.top) {
+            __weak __typeof(self) wself = self;
+            [UIView animateWithDuration:0.2 animations:^{
+                wself.scrollView.contentInset = inset;
+            }];
+        }
     }else if (y+CGRectGetHeight(self.scrollView.frame) > self.scrollView.contentSize.height && self.loadBottomView) {//bottom
         y = y + CGRectGetHeight(self.scrollView.frame) - self.scrollView.contentSize.height;
         y = MIN(y, CGRectGetHeight(self.loadBottomView.frame));

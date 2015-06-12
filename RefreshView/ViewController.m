@@ -38,9 +38,9 @@
     UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, -40, 320, 40)];
     view.backgroundColor = [UIColor lightGrayColor];
 
-    self.loadMore.loadBottomView = view;
-//    self.loadMore.loadTopView = view;
-//    self.loadMore.canAutoLoadTop = NO;
+//    self.loadMore.loadBottomView = view;
+    self.loadMore.loadTopView = view;
+    self.loadMore.canAutoLoadTop = NO;
 //    [self.loadMore showLoadTop];
 //    self.loadMore.loadTopView = nil;
 //    [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(endLoading) userInfo:nil repeats:NO];
@@ -61,6 +61,10 @@
 
 -(void)loadMoreBottomFinish:(void (^)())finish{
     
+}
+
+-(void)loadMoreTopFinish:(void (^)(CGFloat))finish{
+    [NSTimer scheduledTimerWithTimeInterval:2 target:self selector:@selector(loadFinish:) userInfo:@{@"finish":finish} repeats:NO];
 }
 //-(void)loadMoreBottomAutoLoadFinish:(void (^)())finish{
 //    [NSTimer scheduledTimerWithTimeInterval:0.5 target:self selector:@selector(loadFinishAuto:) userInfo:@{@"finish":finish} repeats:NO];
