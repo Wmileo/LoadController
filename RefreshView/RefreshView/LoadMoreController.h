@@ -33,13 +33,8 @@
 -(instancetype)initWithScrollView:(UIScrollView *)scrollView;
 
 #pragma mark -
--(void)repositionLoadBottomView;
 -(void)disappearLoadBottom;
 -(void)showLoadTop;
 -(void)disappearLoadTop;
-
-#pragma mark - 
--(void)scrollViewDidEndDragging:(UIScrollView *)scrollView;
--(void)scrollViewDidScroll:(UIScrollView *)scrollView;
 
 @end

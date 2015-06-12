@@ -16,17 +16,32 @@
 
 @implementation LoadMoreController
 
--(instancetype)initWithScrollView:(UIScrollView *)scrollView{
+-(void)dealloc{
+    [self.scrollView removeObserver:self forKeyPath:@"contentSize"];
+    [self.scrollView removeObserver:self forKeyPath:@"contentOffset"];
+    [self.scrollView.panGestureRecognizer removeTarget:self action:@selector(handleScrollViewDrag:)];
+}
 
+-(instancetype)initWithScrollView:(UIScrollView *)scrollView{
     self = [super init];
     if (self) {
         self.scrollView = scrollView;
         self.isLoading = NO;
         self.canAutoLoadTop = YES;
         self.canAutoLoadBottom = YES;
+        
+        [self.scrollView addObserver:self
+                          forKeyPath:@"contentOffset"
+                             options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld
+                             context:NULL];
+        [self.scrollView.panGestureRecognizer addTarget:self action:@selector(handleScrollViewDrag:)];
+        [self.scrollView addObserver:self
+                          forKeyPath:@"contentSize"
+                             options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld
+                             context:NULL];
+        [self.scrollView.panGestureRecognizer addTarget:self action:@selector(handleScrollViewDrag:)];
     }
     return self;
-    
 }
 
 -(void)setLoadTopView:(UIView *)loadTopView{
@@ -55,12 +70,6 @@
     
 }
 
--(void)repositionLoadBottomView{
-    CGRect rect = self.loadBottomView.frame;
-    rect.origin.y = self.scrollView.contentSize.height;
-    self.loadBottomView.frame = rect;
-}
-
 -(void)showLoadTop{
     if (self.loadTopView) {
         self.isLoading = YES;
@@ -71,68 +80,15 @@
 -(void)disappearLoadTop{
     if (self.scrollView.contentInset.top != 0) {
         __weak __typeof(self) wself = self;
-        [UIView animateWithDuration:0.2 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^{
+        [UIView animateWithDuration:0.2 animations:^{
             wself.scrollView.contentInset = UIEdgeInsetsZero;
-        } completion:^(BOOL finished) {
-            wself.isLoading = NO;
         }];
+        self.isLoading = NO;
     }
 }
 
 -(void)disappearLoadBottom{
     [self loadBottomFinish];
-}
-
-#pragma mark - 
--(void)scrollViewDidScroll:(UIScrollView *)scrollView{
-    CGFloat y = scrollView.contentOffset.y;
-    if (y < 0 && self.loadTopView) {//top
-        y = MAX(y, -CGRectGetHeight(self.loadTopView.frame));
-        UIEdgeInsets inset = UIEdgeInsetsMake(-y, 0, 0, 0);
-        if (self.canAutoLoadTop) {
-            if (!self.isLoading) {
-                [self loadMoreTopAutoLoad];
-            }
-        }else{
-            if (!self.isLoading) {
-                inset.top = 0;
-            }
-        }
-        [UIView animateWithDuration:0.2 animations:^{
-            scrollView.contentInset = inset;
-        }];
-    }else if (y+CGRectGetHeight(scrollView.frame) > scrollView.contentSize.height && self.loadBottomView) {//bottom
-        y = y + CGRectGetHeight(scrollView.frame) - scrollView.contentSize.height;
-        y = MIN(y, CGRectGetHeight(self.loadBottomView.frame));
-        UIEdgeInsets inset = UIEdgeInsetsMake(0, 0, y, 0);
-        if (self.canAutoLoadBottom) {
-            if (!self.isLoading) {
-                [self loadMoreBottomAutoLoad];
-            }
-        }else{
-            if (!self.isLoading) {
-//                inset.bottom = 0;
-            }
-        }
-        scrollView.contentInset = inset;
-    }else if (scrollView.contentInset.top != 0 || scrollView.contentInset.bottom != 0){
-        scrollView.contentInset = UIEdgeInsetsZero;
-    }
-}
--(void)scrollViewDidEndDragging:(UIScrollView *)scrollView{
-
-    CGFloat y = scrollView.contentOffset.y;
-    if (self.loadTopView &&
-        !self.canAutoLoadTop &&
-        y <= -CGRectGetHeight(self.loadTopView.frame)) {//top
-        [self loadMoreTop];
-        NSLog(@"start");
-    }else if (self.loadBottomView &&
-              !self.canAutoLoadBottom &&
-              (y + CGRectGetHeight(scrollView.frame)) >= (CGRectGetHeight(self.loadBottomView.frame) + scrollView.contentSize.height)) {//bottom
-        [self loadMoreBottom];
-    }
-
 }
 
 #pragma mark - top
@@ -163,19 +119,13 @@
                                       : insetHeight - top));
         [self.scrollView setContentOffset:offset];
         self.scrollView.contentInset = UIEdgeInsetsZero;
-        self.isLoading = NO;
-        NSLog(@"f-0");
     }else if (top != 0) {
         __weak __typeof(self) wself = self;
-        [UIView animateWithDuration:0.2 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^{
+        [UIView animateWithDuration:0.2 delay:0.2 options:UIViewAnimationOptionCurveLinear animations:^{
             wself.scrollView.contentInset = UIEdgeInsetsZero;
-        } completion:^(BOOL finished) {
-            wself.isLoading = NO;
-            NSLog(@"f - h - 0");
-        }];
-    }else{
-        self.isLoading = NO;
+        } completion:nil];
     }
+    self.isLoading = NO;
 }
 
 #pragma mark - bottom
@@ -199,11 +149,85 @@
 }
 -(void)loadBottomFinish{
     __weak __typeof(self) wself = self;
-    [UIView animateWithDuration:0.2 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^{
+    [UIView animateWithDuration:0.2 animations:^{
         wself.scrollView.contentInset = UIEdgeInsetsZero;
-    } completion:^(BOOL finished) {
-        wself.isLoading = NO;
     }];
+    self.isLoading = NO;
 }
+
+#pragma mark - kvc
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context{
+    if (object == self.scrollView) {
+        if ([keyPath isEqualToString:@"contentSize"]) {
+            if (self.loadBottomView) {
+                CGRect rect = self.loadBottomView.frame;
+                rect.origin.y = self.scrollView.contentSize.height;
+                self.loadBottomView.frame = rect;
+            }
+        }else if ([keyPath isEqualToString:@"contentOffset"]){
+            [self scrollViewDidScroll];
+        }
+    }
+}
+
+-(void)scrollViewDidScroll{
+    CGFloat y = self.scrollView.contentOffset.y;
+    if (y < 0 && self.loadTopView) {//top
+        y = MAX(y, -CGRectGetHeight(self.loadTopView.frame));
+        UIEdgeInsets inset = UIEdgeInsetsMake(-y, 0, 0, 0);
+        if (self.canAutoLoadTop) {
+            if (!self.isLoading) {
+                [self loadMoreTopAutoLoad];
+            }
+        }else{
+            if (!self.isLoading) {
+                inset.top = 0;
+            }
+        }
+        __weak __typeof(self) wself = self;
+        [UIView animateWithDuration:0.2 animations:^{
+            wself.scrollView.contentInset = inset;
+        }];
+    }else if (y+CGRectGetHeight(self.scrollView.frame) > self.scrollView.contentSize.height && self.loadBottomView) {//bottom
+        y = y + CGRectGetHeight(self.scrollView.frame) - self.scrollView.contentSize.height;
+        y = MIN(y, CGRectGetHeight(self.loadBottomView.frame));
+        UIEdgeInsets inset = UIEdgeInsetsMake(0, 0, y, 0);
+        if (self.canAutoLoadBottom) {
+            if (!self.isLoading) {
+                [self loadMoreBottomAutoLoad];
+            }
+        }else{
+            if (!self.isLoading) {
+                //                inset.bottom = 0;
+            }
+        }
+        self.scrollView.contentInset = inset;
+    }else if (self.scrollView.contentInset.top != 0 || self.scrollView.contentInset.bottom != 0){
+        self.scrollView.contentInset = UIEdgeInsetsZero;
+    }
+}
+
+#pragma mark - pan
+
+-(void)handleScrollViewDrag:(UIPanGestureRecognizer *)pan{
+    if (pan.state == UIGestureRecognizerStateEnded || pan.state == UIGestureRecognizerStateCancelled || pan.state == UIGestureRecognizerStateFailed || pan.state == UIGestureRecognizerStateRecognized) {
+        
+        [self scrollViewDidEndDrag];
+    }
+}
+-(void)scrollViewDidEndDrag{
+    CGFloat y = self.scrollView.contentOffset.y;
+    if (self.loadTopView &&
+        !self.canAutoLoadTop &&
+        y <= -CGRectGetHeight(self.loadTopView.frame)) {//top
+        [self loadMoreTop];
+    }else if (self.loadBottomView &&
+              !self.canAutoLoadBottom &&
+              (y + CGRectGetHeight(self.scrollView.frame)) >= (CGRectGetHeight(self.loadBottomView.frame) + self.scrollView.contentSize.height)) {//bottom
+        [self loadMoreBottom];
+    }
+}
+
+
 
 @end
