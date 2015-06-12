@@ -93,19 +93,10 @@
 
 #pragma mark - top
 -(void)loadMoreTop{
-    if (self.delegate && [self.delegate respondsToSelector:@selector(loadMoreTopLoadFinish:)]) {
+    if (self.delegate && [self.delegate respondsToSelector:@selector(loadMoreTopFinish:)]) {
         self.isLoading = YES;
         __weak __typeof(self) wself = self;
-        [self.delegate loadMoreTopLoadFinish:^(CGFloat insetHeight) {
-            [wself loadTopFinishWithInsetHeight:insetHeight];
-        }];
-    }
-}
--(void)loadMoreTopAutoLoad{
-    if (self.delegate && [self.delegate respondsToSelector:@selector(loadMoreTopAutoLoadFinish:)]) {
-        self.isLoading = YES;
-        __weak __typeof(self) wself = self;
-        [self.delegate loadMoreTopAutoLoadFinish:^(CGFloat insetHeight) {
+        [self.delegate loadMoreTopFinish:^(CGFloat insetHeight) {
             [wself loadTopFinishWithInsetHeight:insetHeight];
         }];
     }
@@ -129,20 +120,11 @@
 }
 
 #pragma mark - bottom
--(void)loadMoreBottomAutoLoad{
-    if (self.delegate && [self.delegate respondsToSelector:@selector(loadMoreBottomAutoLoadFinish:)]) {
-        self.isLoading = YES;
-        __weak __typeof(self) wself = self;
-        [self.delegate loadMoreBottomAutoLoadFinish:^{
-            [wself loadBottomFinish];
-        }];
-    }
-}
 -(void)loadMoreBottom{
-    if (self.delegate && [self.delegate respondsToSelector:@selector(loadMoreBottomLoadFinish:)]) {
+    if (self.delegate && [self.delegate respondsToSelector:@selector(loadMoreBottomFinish:)]) {
         self.isLoading = YES;
         __weak __typeof(self) wself = self;
-        [self.delegate loadMoreBottomLoadFinish:^{
+        [self.delegate loadMoreBottomFinish:^{
             [wself loadBottomFinish];
         }];
     }
@@ -177,7 +159,7 @@
         UIEdgeInsets inset = UIEdgeInsetsMake(-y, 0, 0, 0);
         if (self.canAutoLoadTop) {
             if (!self.isLoading) {
-                [self loadMoreTopAutoLoad];
+                [self loadMoreTop];
             }
         }else{
             if (!self.isLoading) {
@@ -194,7 +176,7 @@
         UIEdgeInsets inset = UIEdgeInsetsMake(0, 0, y, 0);
         if (self.canAutoLoadBottom) {
             if (!self.isLoading) {
-                [self loadMoreBottomAutoLoad];
+                [self loadMoreBottom];
             }
         }else{
             if (!self.isLoading) {

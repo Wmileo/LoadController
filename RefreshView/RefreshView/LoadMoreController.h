@@ -12,10 +12,8 @@
 @protocol LoadMoreControllerDelegate <NSObject>
 
 @optional
--(void)loadMoreTopAutoLoadFinish:(void (^)(CGFloat insetHeight))finish;
--(void)loadMoreTopLoadFinish:(void (^)(CGFloat insetHeight))finish;
--(void)loadMoreBottomAutoLoadFinish:(void (^)())finish;
--(void)loadMoreBottomLoadFinish:(void (^)())finish;
+-(void)loadMoreTopFinish:(void (^)(CGFloat insetHeight))finish;
+-(void)loadMoreBottomFinish:(void (^)())finish;
 
 @end
 

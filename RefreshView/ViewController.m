@@ -59,9 +59,12 @@
 
 #pragma mark - loadMore
 
--(void)loadMoreBottomAutoLoadFinish:(void (^)())finish{
-    [NSTimer scheduledTimerWithTimeInterval:0.5 target:self selector:@selector(loadFinishAuto:) userInfo:@{@"finish":finish} repeats:NO];
+-(void)loadMoreBottomFinish:(void (^)())finish{
+    
 }
+//-(void)loadMoreBottomAutoLoadFinish:(void (^)())finish{
+//    [NSTimer scheduledTimerWithTimeInterval:0.5 target:self selector:@selector(loadFinishAuto:) userInfo:@{@"finish":finish} repeats:NO];
+//}
 //
 //-(void)loadMoreBottomLoadFinish:(void (^)())finish{
 //    [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(loadFinish:) userInfo:@{@"finish":finish} repeats:NO];
@@ -75,22 +78,22 @@
 //    [NSTimer scheduledTimerWithTimeInterval:0 target:self selector:@selector(loadFinish:) userInfo:@{@"finish":finish} repeats:NO];
 //}
 //
--(void)loadFinishAuto:(id)info{
-    void (^finish)(CGFloat) = ((NSTimer *)info).userInfo[@"finish"];
-
-    if (self.num > 7) {
-        self.loadMore.canAutoLoadBottom = NO;
-        if (finish) {
-            finish(0);
-        }
-        return;
-    }
-    self.num++;
-    [self.tableView reloadData];
-    if (finish) {
-        finish(0);
-    }
-}
+//-(void)loadFinishAuto:(id)info{
+//    void (^finish)(CGFloat) = ((NSTimer *)info).userInfo[@"finish"];
+//
+//    if (self.num > 7) {
+//        self.loadMore.canAutoLoadBottom = NO;
+//        if (finish) {
+//            finish(0);
+//        }
+//        return;
+//    }
+//    self.num++;
+//    [self.tableView reloadData];
+//    if (finish) {
+//        finish(0);
+//    }
+//}
 //
 -(void)loadFinish:(id)info{
     void (^finish)(CGFloat) = ((NSTimer *)info).userInfo[@"finish"];
