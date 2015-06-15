@@ -178,9 +178,9 @@
         if (self.canAutoLoadBottom) {
             [self loadMoreBottom];
         }else{
-            if (!self.isLoading) {
-                //                inset.bottom = 0;
-            }
+//            if (!self.isLoading) {
+//                inset.bottom = 0;
+//            }
         }
         self.scrollView.contentInset = inset;
     }else if (self.scrollView.contentInset.top != 0 || self.scrollView.contentInset.bottom != 0){
