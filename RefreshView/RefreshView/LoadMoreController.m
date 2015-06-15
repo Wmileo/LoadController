@@ -197,6 +197,7 @@
 }
 -(void)scrollViewDidEndDrag{
     CGFloat y = self.scrollView.contentOffset.y;
+    if (![self canLoadWithCurrentVelocity]) return;
     if (self.loadTopView &&
         !self.canAutoLoadTop &&
         y <= -CGRectGetHeight(self.loadTopView.frame)) {
@@ -208,6 +209,11 @@
 //bottom
         [self loadMoreBottom];
     }
+}
+
+-(BOOL)canLoadWithCurrentVelocity{
+    CGFloat velocityY = [self.scrollView.panGestureRecognizer velocityInView:self.scrollView].y;
+    return velocityY < 1000 && velocityY > -1000;
 }
 
 @end
