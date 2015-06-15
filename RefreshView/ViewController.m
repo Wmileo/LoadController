@@ -41,9 +41,9 @@
 //    self.loadMore.loadBottomView = view;
     self.loadMore.loadTopView = view;
     self.loadMore.canAutoLoadTop = NO;
-//    [self.loadMore showLoadTop];
+    [self.loadMore showLoadTop];
 //    self.loadMore.loadTopView = nil;
-//    [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(endLoading) userInfo:nil repeats:NO];
+    [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(endLoading) userInfo:nil repeats:NO];
 
     // Do any additional setup after loading the view, typically from a nib.
 }
@@ -54,7 +54,7 @@
 }
 
 -(void)endLoading{
-    [self.loadMore showLoadTop];
+    [self.loadMore disappearLoadTop];
 }
 
 #pragma mark - loadMore
@@ -64,7 +64,7 @@
 }
 
 -(void)loadMoreTopFinish:(void (^)(CGFloat))finish{
-    [NSTimer scheduledTimerWithTimeInterval:2 target:self selector:@selector(loadFinish:) userInfo:@{@"finish":finish} repeats:NO];
+    [NSTimer scheduledTimerWithTimeInterval:0 target:self selector:@selector(loadFinish:) userInfo:@{@"finish":finish} repeats:NO];
 }
 //-(void)loadMoreBottomAutoLoadFinish:(void (^)())finish{
 //    [NSTimer scheduledTimerWithTimeInterval:0.5 target:self selector:@selector(loadFinishAuto:) userInfo:@{@"finish":finish} repeats:NO];

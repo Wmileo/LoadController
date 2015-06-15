@@ -39,7 +39,6 @@
                           forKeyPath:@"contentSize"
                              options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld
                              context:NULL];
-        [self.scrollView.panGestureRecognizer addTarget:self action:@selector(handleScrollViewDrag:)];
     }
     return self;
 }
@@ -80,7 +79,7 @@
 -(void)disappearLoadTop{
     if (self.scrollView.contentInset.top != 0) {
         __weak __typeof(self) wself = self;
-        [UIView animateWithDuration:0.2 animations:^{
+        [UIView animateWithDuration:0.15 animations:^{
             wself.scrollView.contentInset = UIEdgeInsetsZero;
         }];
         self.isLoading = NO;
@@ -93,7 +92,7 @@
 
 #pragma mark - top
 -(void)loadMoreTop{
-    if (self.delegate && [self.delegate respondsToSelector:@selector(loadMoreTopFinish:)]) {
+    if (!self.isLoading && self.delegate && [self.delegate respondsToSelector:@selector(loadMoreTopFinish:)]) {
         self.isLoading = YES;
         __weak __typeof(self) wself = self;
         [self.delegate loadMoreTopFinish:^(CGFloat insetHeight) {
@@ -112,16 +111,16 @@
         self.scrollView.contentInset = UIEdgeInsetsZero;
     }else if (top != 0) {
         __weak __typeof(self) wself = self;
-        [UIView animateWithDuration:0.2 delay:0.2 options:UIViewAnimationOptionCurveLinear animations:^{
+        [UIView animateWithDuration:0.3 animations:^{
             wself.scrollView.contentInset = UIEdgeInsetsZero;
-        } completion:nil];
+        }];
     }
     self.isLoading = NO;
 }
 
 #pragma mark - bottom
 -(void)loadMoreBottom{
-    if (self.delegate && [self.delegate respondsToSelector:@selector(loadMoreBottomFinish:)]) {
+    if (!self.isLoading && self.delegate && [self.delegate respondsToSelector:@selector(loadMoreBottomFinish:)]) {
         self.isLoading = YES;
         __weak __typeof(self) wself = self;
         [self.delegate loadMoreBottomFinish:^{
@@ -131,7 +130,7 @@
 }
 -(void)loadBottomFinish{
     __weak __typeof(self) wself = self;
-    [UIView animateWithDuration:0.2 animations:^{
+    [UIView animateWithDuration:0.15 animations:^{
         wself.scrollView.contentInset = UIEdgeInsetsZero;
     }];
     self.isLoading = NO;
@@ -154,13 +153,12 @@
 
 -(void)scrollViewDidScroll{
     CGFloat y = self.scrollView.contentOffset.y;
-    if (y < 0 && self.loadTopView) {//top
+    if (y < 0 && self.loadTopView) {
+//top
         y = MAX(y, -CGRectGetHeight(self.loadTopView.frame));
         UIEdgeInsets inset = UIEdgeInsetsMake(-y, 0, 0, 0);
         if (self.canAutoLoadTop) {
-            if (!self.isLoading) {
-                [self loadMoreTop];
-            }
+            [self loadMoreTop];
         }else{
             if (!self.isLoading) {
                 inset.top = 0;
@@ -168,18 +166,17 @@
         }
         if (inset.top != self.scrollView.contentInset.top) {
             __weak __typeof(self) wself = self;
-            [UIView animateWithDuration:0.2 animations:^{
+            [UIView animateWithDuration:0.1 animations:^{
                 wself.scrollView.contentInset = inset;
             }];
         }
-    }else if (y+CGRectGetHeight(self.scrollView.frame) > self.scrollView.contentSize.height && self.loadBottomView) {//bottom
+    }else if (y+CGRectGetHeight(self.scrollView.frame) > self.scrollView.contentSize.height && self.loadBottomView) {
+//bottom
         y = y + CGRectGetHeight(self.scrollView.frame) - self.scrollView.contentSize.height;
         y = MIN(y, CGRectGetHeight(self.loadBottomView.frame));
         UIEdgeInsets inset = UIEdgeInsetsMake(0, 0, y, 0);
         if (self.canAutoLoadBottom) {
-            if (!self.isLoading) {
-                [self loadMoreBottom];
-            }
+            [self loadMoreBottom];
         }else{
             if (!self.isLoading) {
                 //                inset.bottom = 0;
@@ -195,7 +192,6 @@
 
 -(void)handleScrollViewDrag:(UIPanGestureRecognizer *)pan{
     if (pan.state == UIGestureRecognizerStateEnded || pan.state == UIGestureRecognizerStateCancelled || pan.state == UIGestureRecognizerStateFailed || pan.state == UIGestureRecognizerStateRecognized) {
-        
         [self scrollViewDidEndDrag];
     }
 }
@@ -203,15 +199,15 @@
     CGFloat y = self.scrollView.contentOffset.y;
     if (self.loadTopView &&
         !self.canAutoLoadTop &&
-        y <= -CGRectGetHeight(self.loadTopView.frame)) {//top
+        y <= -CGRectGetHeight(self.loadTopView.frame)) {
+//top
         [self loadMoreTop];
     }else if (self.loadBottomView &&
               !self.canAutoLoadBottom &&
-              (y + CGRectGetHeight(self.scrollView.frame)) >= (CGRectGetHeight(self.loadBottomView.frame) + self.scrollView.contentSize.height)) {//bottom
+              (y + CGRectGetHeight(self.scrollView.frame)) >= (CGRectGetHeight(self.loadBottomView.frame) + self.scrollView.contentSize.height)) {
+//bottom
         [self loadMoreBottom];
     }
 }
-
-
 
 @end
