@@ -72,6 +72,7 @@
 -(void)showLoadTop{
     if (self.loadTopView) {
         self.isLoading = YES;
+        self.loadTopView.status = Load_Loading;
         [self.scrollView setContentOffset:CGPointMake(0, -CGRectGetHeight(self.loadTopView.frame)) animated:YES];
     }
 }
@@ -79,6 +80,7 @@
 -(void)disappearLoadTop{
     if (self.scrollView.contentInset.top != 0) {
         __weak __typeof(self) wself = self;
+        self.loadTopView.status = Load_LoadingDone;
         [UIView animateWithDuration:0.15 animations:^{
             wself.scrollView.contentInset = UIEdgeInsetsZero;
         }];

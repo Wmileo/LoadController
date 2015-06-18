@@ -14,15 +14,6 @@
 
 @implementation LoadMoreView
 
-- (instancetype)initWithFrame:(CGRect)frame
-{
-    self = [super initWithFrame:frame];
-    if (self) {
-        
-    }
-    return self;
-}
-
 -(void)setStatus:(Load_Status)status{
     if (_status == status) {
         return;
