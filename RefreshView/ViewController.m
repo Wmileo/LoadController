@@ -42,7 +42,7 @@
     topV.tipsPulling = @"下拉加载";
     topV.tipsShouldLoad = @"松手加载";
     self.loadMore.loadTopView = topV;
-    self.loadMore.canAutoLoadTop = NO;
+//    self.loadMore.canAutoLoadTop = NO;
 //    [self.loadMore showLoadTop];
 //    self.loadMore.loadTopView = nil;
 //    [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(endLoading) userInfo:nil repeats:NO];

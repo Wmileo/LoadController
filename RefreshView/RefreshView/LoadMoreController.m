@@ -78,25 +78,22 @@
 }
 
 -(void)disappearLoadTop{
-    if (self.scrollView.contentInset.top != 0) {
-        __weak __typeof(self) wself = self;
-        self.loadTopView.status = Load_LoadingDone;
-        [UIView animateWithDuration:0.15 animations:^{
-            wself.scrollView.contentInset = UIEdgeInsetsZero;
-        }];
-        self.isLoading = NO;
-    }
+    self.loadTopView.status = Load_LoadingDone;
+    [self animationToNormal];
+    self.isLoading = NO;
 }
 
 -(void)disappearLoadBottom{
-    [self loadBottomFinish];
+    self.loadBottomView.status = Load_LoadingDone;
+    [self animationToNormal];
+    self.isLoading = NO;
 }
 
 #pragma mark - top
 -(void)loadMoreTop{
-    self.loadTopView.status = Load_Loading;
     if (!self.isLoading && self.delegate && [self.delegate respondsToSelector:@selector(loadMoreTopFinish:)]) {
         self.isLoading = YES;
+        self.loadTopView.status = Load_Loading;
         __weak __typeof(self) wself = self;
         [self.delegate loadMoreTopFinish:^(CGFloat insetHeight) {
             [wself loadTopFinishWithInsetHeight:insetHeight];
@@ -114,19 +111,16 @@
         [self.scrollView setContentOffset:offset];
         self.scrollView.contentInset = UIEdgeInsetsZero;
     }else if (top != 0) {
-        __weak __typeof(self) wself = self;
-        [UIView animateWithDuration:0.3 animations:^{
-            wself.scrollView.contentInset = UIEdgeInsetsZero;
-        }];
+        [NSTimer scheduledTimerWithTimeInterval:0.4 target:self selector:@selector(animationToNormal) userInfo:nil repeats:NO];
     }
     self.isLoading = NO;
 }
 
 #pragma mark - bottom
 -(void)loadMoreBottom{
-    self.loadBottomView.status = Load_Loading;
     if (!self.isLoading && self.delegate && [self.delegate respondsToSelector:@selector(loadMoreBottomFinish:)]) {
         self.isLoading = YES;
+        self.loadBottomView.status = Load_Loading;
         __weak __typeof(self) wself = self;
         [self.delegate loadMoreBottomFinish:^{
             [wself loadBottomFinish];
@@ -135,10 +129,7 @@
 }
 -(void)loadBottomFinish{
     self.loadBottomView.status = Load_LoadingDone;
-    __weak __typeof(self) wself = self;
-    [UIView animateWithDuration:0.15 animations:^{
-        wself.scrollView.contentInset = UIEdgeInsetsZero;
-    }];
+    [NSTimer scheduledTimerWithTimeInterval:0.4 target:self selector:@selector(animationToNormal) userInfo:nil repeats:NO];
     self.isLoading = NO;
 }
 
@@ -231,5 +222,14 @@
     CGFloat velocityY = [self.scrollView.panGestureRecognizer velocityInView:self.scrollView].y;
     return velocityY < 1000 && velocityY > -1000;
 }
+
+#pragma mark - animation
+-(void)animationToNormal{
+    __weak __typeof(self) wself = self;
+    [UIView animateWithDuration:0.15 animations:^{
+        wself.scrollView.contentInset = UIEdgeInsetsZero;
+    }];
+}
+
 
 @end
