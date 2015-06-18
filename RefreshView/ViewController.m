@@ -35,15 +35,17 @@
     self.loadMore = [[LoadMoreController alloc] initWithScrollView:self.tableView];
     self.loadMore.delegate = self;
     
-    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, -40, 320, 40)];
-    view.backgroundColor = [UIColor lightGrayColor];
-
 //    self.loadMore.loadBottomView = view;
-    self.loadMore.loadTopView = view;
+    LoadMoreView *topV = [[LoadMoreView alloc] initWithFrame:CGRectMake(0, 0, 320, 40)];
+    topV.tipsLoading = @"加载中";
+    topV.tipsLoadingDone = @"加载完成";
+    topV.tipsPulling = @"下拉加载";
+    topV.tipsShouldLoad = @"松手加载";
+    self.loadMore.loadTopView = topV;
     self.loadMore.canAutoLoadTop = NO;
-    [self.loadMore showLoadTop];
+//    [self.loadMore showLoadTop];
 //    self.loadMore.loadTopView = nil;
-    [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(endLoading) userInfo:nil repeats:NO];
+//    [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(endLoading) userInfo:nil repeats:NO];
 
     // Do any additional setup after loading the view, typically from a nib.
 }

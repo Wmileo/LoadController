@@ -43,7 +43,7 @@
     return self;
 }
 
--(void)setLoadTopView:(UIView *)loadTopView{
+-(void)setLoadTopView:(LoadMoreView *)loadTopView{
 
     if (_loadTopView && [self.scrollView.subviews containsObject:_loadTopView]) {
         [_loadTopView removeFromSuperview];
@@ -56,7 +56,7 @@
 
 }
 
--(void)setLoadBottomView:(UIView *)loadBottomView{
+-(void)setLoadBottomView:(LoadMoreView *)loadBottomView{
 
     if (_loadBottomView && [self.scrollView.subviews containsObject:_loadBottomView]) {
         [_loadBottomView removeFromSuperview];
@@ -92,6 +92,7 @@
 
 #pragma mark - top
 -(void)loadMoreTop{
+    self.loadTopView.status = Load_Loading;
     if (!self.isLoading && self.delegate && [self.delegate respondsToSelector:@selector(loadMoreTopFinish:)]) {
         self.isLoading = YES;
         __weak __typeof(self) wself = self;
@@ -101,6 +102,7 @@
     }
 }
 -(void)loadTopFinishWithInsetHeight:(CGFloat)insetHeight{
+    self.loadTopView.status = Load_LoadingDone;
     CGFloat top = self.scrollView.contentInset.top;
     if (insetHeight != 0) {
         CGPoint offset = CGPointMake(0,
@@ -120,6 +122,7 @@
 
 #pragma mark - bottom
 -(void)loadMoreBottom{
+    self.loadBottomView.status = Load_Loading;
     if (!self.isLoading && self.delegate && [self.delegate respondsToSelector:@selector(loadMoreBottomFinish:)]) {
         self.isLoading = YES;
         __weak __typeof(self) wself = self;
@@ -129,6 +132,7 @@
     }
 }
 -(void)loadBottomFinish{
+    self.loadBottomView.status = Load_LoadingDone;
     __weak __typeof(self) wself = self;
     [UIView animateWithDuration:0.15 animations:^{
         wself.scrollView.contentInset = UIEdgeInsetsZero;
@@ -161,6 +165,11 @@
             [self loadMoreTop];
         }else{
             if (!self.isLoading) {
+                if (inset.top == CGRectGetHeight(self.loadTopView.frame)) {
+                    self.loadTopView.status = Load_ShouldLoad;
+                }else{
+                    self.loadTopView.status = Load_Pulling;
+                }
                 inset.top = 0;
             }
         }
@@ -178,9 +187,14 @@
         if (self.canAutoLoadBottom) {
             [self loadMoreBottom];
         }else{
-//            if (!self.isLoading) {
+            if (!self.isLoading) {
+                if (inset.bottom == CGRectGetHeight(self.loadBottomView.frame)) {
+                    self.loadBottomView.status = Load_ShouldLoad;
+                }else{
+                    self.loadBottomView.status = Load_Pulling;
+                }
 //                inset.bottom = 0;
-//            }
+            }
         }
         self.scrollView.contentInset = inset;
     }else if (self.scrollView.contentInset.top != 0 || self.scrollView.contentInset.bottom != 0){

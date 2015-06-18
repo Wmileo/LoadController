@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
+#import "LoadMoreView.h"
 
 @protocol LoadMoreControllerDelegate <NSObject>
 
@@ -19,8 +20,8 @@
 
 @interface LoadMoreController : NSObject
 
-@property (nonatomic, strong) UIView *loadTopView;
-@property (nonatomic, strong) UIView *loadBottomView;
+@property (nonatomic, strong) LoadMoreView *loadTopView;
+@property (nonatomic, strong) LoadMoreView *loadBottomView;
 @property (nonatomic, assign) id<LoadMoreControllerDelegate> delegate;
 @property (nonatomic, assign) BOOL isLoading;
 
