@@ -15,7 +15,7 @@
 		7E3FEFD71B26E6610003ADD4 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7E3FEFD51B26E6610003ADD4 /* LaunchScreen.xib */; };
 		7E3FEFE31B26E6610003ADD4 /* RefreshViewTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E3FEFE21B26E6610003ADD4 /* RefreshViewTests.m */; };
 		7E3FEFF51B297E990003ADD4 /* LoadMoreController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E3FEFF41B297E990003ADD4 /* LoadMoreController.m */; };
-		7E3FEFFF1B3176A90003ADD4 /* LoadMoreView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E3FEFFE1B3176A90003ADD4 /* LoadMoreView.m */; };
+		7EE9B5DF1B32934A0081B4FD /* LoadMoreView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EE9B5DE1B32934A0081B4FD /* LoadMoreView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,8 +44,8 @@
 		7E3FEFE21B26E6610003ADD4 /* RefreshViewTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RefreshViewTests.m; sourceTree = "<group>"; };
 		7E3FEFF31B297E990003ADD4 /* LoadMoreController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LoadMoreController.h; path = RefreshView/LoadMoreController.h; sourceTree = "<group>"; };
 		7E3FEFF41B297E990003ADD4 /* LoadMoreController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LoadMoreController.m; path = RefreshView/LoadMoreController.m; sourceTree = "<group>"; };
-		7E3FEFFD1B3176A90003ADD4 /* LoadMoreView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoadMoreView.h; sourceTree = "<group>"; };
-		7E3FEFFE1B3176A90003ADD4 /* LoadMoreView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoadMoreView.m; sourceTree = "<group>"; };
+		7EE9B5DD1B32934A0081B4FD /* LoadMoreView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LoadMoreView.h; path = RefreshView/LoadMoreView.h; sourceTree = "<group>"; };
+		7EE9B5DE1B32934A0081B4FD /* LoadMoreView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LoadMoreView.m; path = RefreshView/LoadMoreView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -131,8 +131,8 @@
 			children = (
 				7E3FEFF31B297E990003ADD4 /* LoadMoreController.h */,
 				7E3FEFF41B297E990003ADD4 /* LoadMoreController.m */,
-				7E3FEFFE1B3176A90003ADD4 /* LoadMoreView.m */,
-				7E3FEFFD1B3176A90003ADD4 /* LoadMoreView.h */,
+				7EE9B5DD1B32934A0081B4FD /* LoadMoreView.h */,
+				7EE9B5DE1B32934A0081B4FD /* LoadMoreView.m */,
 			);
 			name = RefreshView;
 			sourceTree = "<group>";
@@ -239,7 +239,7 @@
 			files = (
 				7E3FEFCF1B26E6610003ADD4 /* ViewController.m in Sources */,
 				7E3FEFCC1B26E6610003ADD4 /* AppDelegate.m in Sources */,
-				7E3FEFFF1B3176A90003ADD4 /* LoadMoreView.m in Sources */,
+				7EE9B5DF1B32934A0081B4FD /* LoadMoreView.m in Sources */,
 				7E3FEFF51B297E990003ADD4 /* LoadMoreController.m in Sources */,
 				7E3FEFC91B26E6610003ADD4 /* main.m in Sources */,
 			);
