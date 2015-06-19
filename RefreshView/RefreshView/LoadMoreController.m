@@ -136,6 +136,9 @@
 #pragma mark - kvc
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context{
     if (object == self.scrollView) {
+        if ([change[NSKeyValueChangeNewKey] isEqual:change[NSKeyValueChangeOldKey]]) {
+            return;
+        }
         if ([keyPath isEqualToString:@"contentSize"]) {
             if (self.loadBottomView) {
                 CGRect rect = self.loadBottomView.frame;
