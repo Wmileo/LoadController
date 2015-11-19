@@ -189,7 +189,6 @@
                 }else{
                     self.loadBottomView.status = Load_Pulling;
                 }
-//                inset.bottom = 0;
             }
         }
         self.scrollView.contentInset = inset;

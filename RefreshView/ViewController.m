@@ -41,7 +41,7 @@
     topV.tipsLoadingDone = @"加载完成";
     topV.tipsPulling = @"下拉加载";
     topV.tipsShouldLoad = @"松手加载";
-    self.loadMore.loadTopView = topV;
+    self.loadMore.loadBottomView = topV;
 //    self.loadMore.canAutoLoadTop = NO;
 //    [self.loadMore showLoadTop];
 //    self.loadMore.loadTopView = nil;
@@ -56,13 +56,13 @@
 }
 
 -(void)endLoading{
-    [self.loadMore disappearLoadTop];
+    [self.loadMore disappearLoadBottom];
 }
 
 #pragma mark - loadMore
 
 -(void)loadMoreBottomFinish:(void (^)())finish{
-    
+    [NSTimer scheduledTimerWithTimeInterval:0 target:self selector:@selector(loadFinish:) userInfo:@{@"finish":finish} repeats:NO];
 }
 
 -(void)loadMoreTopFinish:(void (^)(CGFloat))finish{
@@ -105,7 +105,6 @@
     void (^finish)(CGFloat) = ((NSTimer *)info).userInfo[@"finish"];
     self.num++;
     [self.tableView reloadData];
-//    [self.loadMore repositionLoadBottomView];
     
     if (finish) {
         finish(0);

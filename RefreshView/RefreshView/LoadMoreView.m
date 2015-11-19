@@ -39,28 +39,30 @@
 
 -(void)showLoadingView{
     self.tipsL.text = self.tipsLoading;
-    self.waitView.hidden = NO;
     self.waitView.center = CGPointMake(self.tipsLoading?70:CGRectGetWidth(self.frame)/2, CGRectGetHeight(self.frame)/2);
 }
 -(void)showPullingView{
     self.tipsL.text = self.tipsPulling;
-    self.waitView.hidden = YES;
+    [self.waitView removeFromSuperview];
+    self.waitView = nil;
 }
 -(void)showShouldLoadView{
     self.tipsL.text = self.tipsShouldLoad;
-    self.waitView.hidden = YES;
+    [self.waitView removeFromSuperview];
+    self.waitView = nil;
 }
 -(void)showLoadingDoneView{
     self.tipsL.text = self.tipsLoadingDone;
-    self.waitView.hidden = YES;
+    [self.waitView removeFromSuperview];
+    self.waitView = nil;
 }
 
 #pragma mark - 
 -(UIActivityIndicatorView *)waitView{
     if (!_waitView) {
         _waitView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
-        [self addSubview:self.waitView];
-        [self.waitView startAnimating];
+        [self addSubview:_waitView];
+        [_waitView startAnimating];
     }
     return _waitView;
 }
