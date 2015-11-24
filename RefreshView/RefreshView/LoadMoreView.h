@@ -26,6 +26,7 @@ typedef NS_ENUM(NSInteger, Load_Status){
 @property (nonatomic, copy) NSString *tipsShouldLoad;
 @property (nonatomic, copy) NSString *tipsLoading;
 @property (nonatomic, copy) NSString *tipsLoadingDone;
+@property (nonatomic, assign) BOOL autoHideTips;//自动关闭提示
 
 #pragma mark - 自定义需重写以下方法 按需重写
 -(void)showLoadingView;

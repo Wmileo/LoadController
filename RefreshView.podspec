@@ -2,7 +2,7 @@
 Pod::Spec.new do |s|
 
   s.name         = "RefreshView"
-  s.version      = "0.0.4"
+  s.version      = "0.0.6"
   s.summary      = "用于UIScrollView的上拉下拉加载数据"
 
   s.description  = <<-DESC
@@ -22,7 +22,7 @@ Pod::Spec.new do |s|
   # s.platform     = :ios
   s.platform     = :ios, "5.0"
 
-  s.source       = { :git => "https://github.com/Wmileo/RefreshView.git", :tag => "0.0.4" }
+  s.source       = { :git => "https://github.com/Wmileo/RefreshView.git", :tag => "0.0.6" }
 
 
   s.source_files  = "RefreshView/RefreshView/*.{h,m}"

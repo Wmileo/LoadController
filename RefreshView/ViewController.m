@@ -41,6 +41,7 @@
     topV.tipsLoadingDone = @"加载完成";
     topV.tipsPulling = @"下拉加载";
     topV.tipsShouldLoad = @"松手加载";
+    topV.autoHideTips = YES;
     self.loadMore.loadBottomView = topV;
 //    self.loadMore.canAutoLoadTop = NO;
 //    [self.loadMore showLoadTop];
@@ -131,7 +132,7 @@
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
     static NSString *cellID = @"cell";
-    UITableViewCell *cell = [tableView dequeueReusableHeaderFooterViewWithIdentifier:cellID];
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellID];
     if (!cell) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellID];
     }
