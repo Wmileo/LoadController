@@ -29,6 +29,8 @@
         self.isLoading = NO;
         self.canAutoLoadTop = YES;
         self.canAutoLoadBottom = YES;
+        self.canAutoLoadLeft = YES;
+        self.canAutoLoadRight = YES;
         
         [self.scrollView addObserver:self
                           forKeyPath:@"contentOffset"
