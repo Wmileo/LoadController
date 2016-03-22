@@ -7,13 +7,11 @@
 //
 
 #import "ViewController.h"
-#import "LoadMoreController.h"
+#import "UIScrollView+LoadMore.h"
 
 @interface ViewController () <UITableViewDataSource, UITableViewDelegate, LoadMoreControllerDelegate>
 
 @property (nonatomic, strong) UITableView *tableView;
-
-@property (nonatomic, strong) LoadMoreController *loadMore;
 
 @property (nonatomic, assign) NSInteger num;
 
@@ -32,8 +30,7 @@
     self.tableView.dataSource = self;
     [self.tableView reloadData];
     
-    self.loadMore = [[LoadMoreController alloc] initWithScrollView:self.tableView];
-    self.loadMore.delegate = self;
+    [self.tableView setLoadMoreDelegate:self];
     
 //    self.loadMore.loadBottomView = view;
     LoadMoreView *topV = [[LoadMoreView alloc] initWithFrame:CGRectMake(0, 0, 320, 40)];
@@ -42,7 +39,9 @@
     topV.tipsPulling = @"下拉加载";
     topV.tipsShouldLoad = @"松手加载";
     topV.autoHideTips = YES;
-    self.loadMore.loadBottomView = topV;
+    
+    [self.tableView setLoadMoreBottomView:topV];
+
 //    self.loadMore.canAutoLoadTop = NO;
 //    [self.loadMore showLoadTop];
 //    self.loadMore.loadTopView = nil;
@@ -57,7 +56,7 @@
 }
 
 -(void)endLoading{
-    [self.loadMore disappearLoadBottom];
+    [self.tableView.loadMoreController disappearLoadBottom];
 }
 
 #pragma mark - loadMore

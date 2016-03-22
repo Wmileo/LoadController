@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7E1FBC581CA13F2400E88A66 /* UIScrollView+LoadMore.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E1FBC571CA13F2400E88A66 /* UIScrollView+LoadMore.m */; };
 		7E3FEFC91B26E6610003ADD4 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E3FEFC81B26E6610003ADD4 /* main.m */; };
 		7E3FEFCC1B26E6610003ADD4 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E3FEFCB1B26E6610003ADD4 /* AppDelegate.m */; };
 		7E3FEFCF1B26E6610003ADD4 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E3FEFCE1B26E6610003ADD4 /* ViewController.m */; };
@@ -29,6 +30,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		7E1FBC561CA13F2400E88A66 /* UIScrollView+LoadMore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+LoadMore.h"; sourceTree = "<group>"; };
+		7E1FBC571CA13F2400E88A66 /* UIScrollView+LoadMore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+LoadMore.m"; sourceTree = "<group>"; };
 		7E3FEFC31B26E6600003ADD4 /* RefreshView.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RefreshView.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7E3FEFC71B26E6610003ADD4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7E3FEFC81B26E6610003ADD4 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -133,6 +136,8 @@
 				7E3FEFF41B297E990003ADD4 /* LoadMoreController.m */,
 				7EE9B5DD1B32934A0081B4FD /* LoadMoreView.h */,
 				7EE9B5DE1B32934A0081B4FD /* LoadMoreView.m */,
+				7E1FBC561CA13F2400E88A66 /* UIScrollView+LoadMore.h */,
+				7E1FBC571CA13F2400E88A66 /* UIScrollView+LoadMore.m */,
 			);
 			name = RefreshView;
 			sourceTree = "<group>";
@@ -241,6 +246,7 @@
 				7E3FEFCC1B26E6610003ADD4 /* AppDelegate.m in Sources */,
 				7EE9B5DF1B32934A0081B4FD /* LoadMoreView.m in Sources */,
 				7E3FEFF51B297E990003ADD4 /* LoadMoreController.m in Sources */,
+				7E1FBC581CA13F2400E88A66 /* UIScrollView+LoadMore.m in Sources */,
 				7E3FEFC91B26E6610003ADD4 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
