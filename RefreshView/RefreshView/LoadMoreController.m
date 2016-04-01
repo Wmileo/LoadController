@@ -17,9 +17,11 @@
 @implementation LoadMoreController
 
 -(void)dealloc{
+    
     [self.scrollView removeObserver:self forKeyPath:@"contentSize"];
     [self.scrollView removeObserver:self forKeyPath:@"contentOffset"];
     [self.scrollView.panGestureRecognizer removeTarget:self action:@selector(handleScrollViewDrag:)];
+    
 }
 
 -(instancetype)initWithScrollView:(UIScrollView *)scrollView{
