@@ -61,11 +61,11 @@
 
 #pragma mark - loadMore
 
--(void)loadMoreBottomFinish:(void (^)())finish{
+-(void)loadMoreBottomFinish:(void (^)())finish withScrollView:(UIScrollView *)scrollView{
     [NSTimer scheduledTimerWithTimeInterval:0 target:self selector:@selector(loadFinish:) userInfo:@{@"finish":finish} repeats:NO];
 }
 
--(void)loadMoreTopFinish:(void (^)(CGFloat))finish{
+-(void)loadMoreTopFinish:(void (^)(CGFloat))finish withScrollView:(UIScrollView *)scrollView{
     [NSTimer scheduledTimerWithTimeInterval:0 target:self selector:@selector(loadFinish:) userInfo:@{@"finish":finish} repeats:NO];
 }
 //-(void)loadMoreBottomAutoLoadFinish:(void (^)())finish{

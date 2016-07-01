@@ -119,13 +119,13 @@
 
 #pragma mark - top
 -(void)loadMoreTop{
-    if (!self.isLoading && self.delegate && [self.delegate respondsToSelector:@selector(loadMoreTopFinish:)]) {
+    if (!self.isLoading && self.delegate && [self.delegate respondsToSelector:@selector(loadMoreTopFinish:withScrollView:)]) {
         self.isLoading = YES;
         self.loadTopView.status = Load_Loading;
         __weak __typeof(self) wself = self;
         [self.delegate loadMoreTopFinish:^(CGFloat insetHeight) {
             [wself loadTopFinishWithInsetHeight:insetHeight];
-        }];
+        } withScrollView:self.scrollView];
     }
 }
 -(void)loadTopFinishWithInsetHeight:(CGFloat)insetHeight{
@@ -146,13 +146,13 @@
 
 #pragma mark - bottom
 -(void)loadMoreBottom{
-    if (!self.isLoading && self.delegate && [self.delegate respondsToSelector:@selector(loadMoreBottomFinish:)]) {
+    if (!self.isLoading && self.delegate && [self.delegate respondsToSelector:@selector(loadMoreBottomFinish:withScrollView:)]) {
         self.isLoading = YES;
         self.loadBottomView.status = Load_Loading;
         __weak __typeof(self) wself = self;
         [self.delegate loadMoreBottomFinish:^{
             [wself loadBottomFinish];
-        }];
+        } withScrollView:self.scrollView];
     }
 }
 -(void)loadBottomFinish{
@@ -163,13 +163,13 @@
 
 #pragma mark - left
 -(void)loadMoreLeft{
-    if (!self.isLoading && self.delegate && [self.delegate respondsToSelector:@selector(loadMoreLeftFinish:)]) {
+    if (!self.isLoading && self.delegate && [self.delegate respondsToSelector:@selector(loadMoreLeftFinish:withScrollView:)]) {
         self.isLoading = YES;
         self.loadLeftView.status = Load_Loading;
         __weak __typeof(self) wself = self;
         [self.delegate loadMoreLeftFinish:^(CGFloat insetWidth) {
             [wself loadLeftFinishWithInsetWidth:insetWidth];
-        }];
+        } withScrollView:self.scrollView];
     }
 }
 
@@ -188,13 +188,13 @@
 
 #pragma mark - right
 -(void)loadMoreRight{
-    if (!self.isLoading && self.delegate && [self.delegate respondsToSelector:@selector(loadMoreRightFinish:)]) {
+    if (!self.isLoading && self.delegate && [self.delegate respondsToSelector:@selector(loadMoreRightFinish:withScrollView:)]) {
         self.isLoading = YES;
         self.loadRightView.status = Load_Loading;
         __weak __typeof(self) wself = self;
         [self.delegate loadMoreRightFinish:^{
             [wself loadRightFinish];
-        }];
+        } withScrollView:self.scrollView];
     }
 }
 -(void)loadRightFinish{

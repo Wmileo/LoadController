@@ -13,11 +13,11 @@
 @protocol LoadMoreControllerDelegate <NSObject>
 
 @optional
--(void)loadMoreTopFinish:(void (^)(CGFloat insetHeight))finish;
--(void)loadMoreBottomFinish:(void (^)())finish;
+-(void)loadMoreTopFinish:(void (^)(CGFloat insetHeight))finish withScrollView:(UIScrollView *)scrollView;
+-(void)loadMoreBottomFinish:(void (^)())finish withScrollView:(UIScrollView *)scrollView;
 
--(void)loadMoreLeftFinish:(void (^)(CGFloat insetWidth))finish;
--(void)loadMoreRightFinish:(void (^)())finish;
+-(void)loadMoreLeftFinish:(void (^)(CGFloat insetWidth))finish withScrollView:(UIScrollView *)scrollView;
+-(void)loadMoreRightFinish:(void (^)())finish withScrollView:(UIScrollView *)scrollView;
 
 @end
 
