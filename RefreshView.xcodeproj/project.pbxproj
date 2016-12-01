@@ -17,6 +17,7 @@
 		7E3FEFF51B297E990003ADD4 /* LoadMoreController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E3FEFF41B297E990003ADD4 /* LoadMoreController.m */; };
 		7EB497211CAE1DEB00F9B64E /* UIScrollView+LoadMore.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB497201CAE1DEB00F9B64E /* UIScrollView+LoadMore.m */; };
 		7EE9B5DF1B32934A0081B4FD /* LoadMoreView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EE9B5DE1B32934A0081B4FD /* LoadMoreView.m */; };
+		B32F76271DF0113B004481B3 /* LMView.m in Sources */ = {isa = PBXBuildFile; fileRef = B32F76261DF0113B004481B3 /* LMView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +50,8 @@
 		7EB497201CAE1DEB00F9B64E /* UIScrollView+LoadMore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIScrollView+LoadMore.m"; path = "RefreshView/UIScrollView+LoadMore.m"; sourceTree = "<group>"; };
 		7EE9B5DD1B32934A0081B4FD /* LoadMoreView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LoadMoreView.h; path = RefreshView/LoadMoreView.h; sourceTree = "<group>"; };
 		7EE9B5DE1B32934A0081B4FD /* LoadMoreView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LoadMoreView.m; path = RefreshView/LoadMoreView.m; sourceTree = "<group>"; };
+		B32F76251DF0113B004481B3 /* LMView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LMView.h; sourceTree = "<group>"; };
+		B32F76261DF0113B004481B3 /* LMView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LMView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -94,6 +97,8 @@
 				7E3FEFCB1B26E6610003ADD4 /* AppDelegate.m */,
 				7E3FEFCD1B26E6610003ADD4 /* ViewController.h */,
 				7E3FEFCE1B26E6610003ADD4 /* ViewController.m */,
+				B32F76251DF0113B004481B3 /* LMView.h */,
+				B32F76261DF0113B004481B3 /* LMView.m */,
 				7E3FEFD01B26E6610003ADD4 /* Main.storyboard */,
 				7E3FEFEC1B26E8E00003ADD4 /* RefreshView */,
 				7E3FEFD31B26E6610003ADD4 /* Images.xcassets */,
@@ -191,6 +196,7 @@
 				TargetAttributes = {
 					7E3FEFC21B26E6600003ADD4 = {
 						CreatedOnToolsVersion = 6.3.2;
+						DevelopmentTeam = 9J6JH9B3QM;
 					};
 					7E3FEFDB1B26E6610003ADD4 = {
 						CreatedOnToolsVersion = 6.3.2;
@@ -248,6 +254,7 @@
 				7E3FEFF51B297E990003ADD4 /* LoadMoreController.m in Sources */,
 				7EB497211CAE1DEB00F9B64E /* UIScrollView+LoadMore.m in Sources */,
 				7E3FEFC91B26E6610003ADD4 /* main.m in Sources */,
+				B32F76271DF0113B004481B3 /* LMView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -373,6 +380,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = 9J6JH9B3QM;
 				INFOPLIST_FILE = RefreshView/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -384,6 +392,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = 9J6JH9B3QM;
 				INFOPLIST_FILE = RefreshView/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

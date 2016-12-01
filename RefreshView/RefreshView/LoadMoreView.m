@@ -16,6 +16,10 @@
 
 @implementation LoadMoreView
 
+-(UIScrollView *)superScrollView{
+    return (UIScrollView *)self.superview;
+}
+
 -(void)setStatus:(Load_Status)status{
     if (_status == status) {
         return;

@@ -15,9 +15,19 @@ typedef NS_ENUM(NSInteger, Load_Status){
     Load_ShouldLoad,
 };
 
+@protocol LoadView <NSObject>
+
+
+
+@end
+
+
 @interface LoadMoreView : UIView
 
 @property (nonatomic, assign) Load_Status status;
+@property (nonatomic, assign) CGFloat offset;//拉出的距离
+
+@property (nonatomic, readonly) UIScrollView *superScrollView;
 
 #pragma mark - 如果自定义的话 不用管这些属性
 @property (nonatomic, strong) UIActivityIndicatorView *waitView;

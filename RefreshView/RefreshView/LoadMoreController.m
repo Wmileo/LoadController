@@ -117,6 +117,30 @@
     self.isLoading = NO;
 }
 
+-(void)setIsLoading:(BOOL)isLoading direction:(Load_Direction)direction afterTime:(NSTimeInterval)time{
+    self.isLoading = isLoading;
+    LoadMoreView *loadMoreView = nil;
+    switch (direction) {
+        case Load_Top:
+            loadMoreView = self.loadTopView;
+            break;
+        case Load_Bottom:
+            loadMoreView = self.loadBottomView;
+            break;
+        case Load_Left:
+            loadMoreView = self.loadLeftView;
+            break;
+        case Load_Right:
+            loadMoreView = self.loadRightView;
+            break;
+        default:
+            break;
+    }
+    loadMoreView.status = isLoading ? Load_Loading : Load_LoadingDone;
+    
+    
+}
+
 #pragma mark - top
 -(void)loadMoreTop{
     if (!self.isLoading && self.delegate && [self.delegate respondsToSelector:@selector(loadMoreTopFinish:withScrollView:)]) {
@@ -233,6 +257,7 @@
     if (y < 0 && self.loadTopView) {
 //top
         y = MAX(y, -CGRectGetHeight(self.loadTopView.frame));
+        self.loadTopView.offset = -y;
         UIEdgeInsets inset = UIEdgeInsetsMake(-y, 0, 0, 0);
         if (self.canAutoLoadTop) {
             [self loadMoreTop];
@@ -256,6 +281,7 @@
 //bottom
         y = y + CGRectGetHeight(self.scrollView.frame) - self.scrollView.contentSize.height;
         y = MIN(y, CGRectGetHeight(self.loadBottomView.frame));
+        self.loadBottomView.offset = y;
         UIEdgeInsets inset = UIEdgeInsetsMake(0, 0, y, 0);
         if (self.canAutoLoadBottom) {
             [self loadMoreBottom];
@@ -277,6 +303,7 @@
     if (x < 0 && self.loadLeftView) {
 //left
         x = MAX(x, -CGRectGetWidth(self.loadLeftView.frame));
+        self.loadLeftView.offset = -x;
         UIEdgeInsets inset = UIEdgeInsetsMake(0, -x, 0, 0);
         if (self.canAutoLoadLeft) {
             [self loadMoreLeft];
@@ -300,6 +327,7 @@
 //right
         x = x + CGRectGetWidth(self.scrollView.frame) - self.scrollView.contentSize.width;
         x = MIN(x, CGRectGetWidth(self.loadRightView.frame));
+        self.loadRightView.offset = x;
         UIEdgeInsets inset = UIEdgeInsetsMake(0, 0, 0, x);
         if (self.canAutoLoadRight) {
             [self loadMoreRight];

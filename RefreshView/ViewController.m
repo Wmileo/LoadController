@@ -8,6 +8,7 @@
 
 #import "ViewController.h"
 #import "UIScrollView+LoadMore.h"
+#import "LMView.h"
 
 @interface ViewController () <UITableViewDataSource, UITableViewDelegate, LoadMoreControllerDelegate>
 
@@ -33,15 +34,15 @@
     [self.tableView setLoadMoreDelegate:self];
     
 //    self.loadMore.loadBottomView = view;
-    LoadMoreView *topV = [[LoadMoreView alloc] initWithFrame:CGRectMake(0, 0, 320, 40)];
+    LMView *topV = [[LMView alloc] initWithFrame:CGRectMake(0, 0, 320, 40)];
     topV.tipsLoading = @"加载中";
     topV.tipsLoadingDone = @"加载完成";
     topV.tipsPulling = @"下拉加载";
     topV.tipsShouldLoad = @"松手加载";
     topV.autoHideTips = YES;
     
-    [self.tableView setLoadMoreBottomView:topV];
-
+    [self.tableView setLoadMoreTopView:topV];
+    self.tableView.loadMoreController.canAutoLoadTop = NO;
 //    self.loadMore.canAutoLoadTop = NO;
 //    [self.loadMore showLoadTop];
 //    self.loadMore.loadTopView = nil;
