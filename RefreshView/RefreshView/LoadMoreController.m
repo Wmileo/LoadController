@@ -118,23 +118,30 @@
 }
 
 -(void)setIsLoading:(BOOL)isLoading direction:(Load_Direction)direction afterTime:(NSTimeInterval)time{
+    
     self.isLoading = isLoading;
     LoadMoreView *loadMoreView = nil;
+    CGPoint point = CGPointMake(0, 0);
     switch (direction) {
         case Load_Top:
             loadMoreView = self.loadTopView;
+            point.y = -CGRectGetHeight(loadMoreView.frame);
             break;
         case Load_Bottom:
             loadMoreView = self.loadBottomView;
             break;
         case Load_Left:
             loadMoreView = self.loadLeftView;
+            point.x = -CGRectGetWidth(loadMoreView.frame);
             break;
         case Load_Right:
             loadMoreView = self.loadRightView;
             break;
         default:
             break;
+    }
+    if (!loadMoreView) {
+        return;
     }
     loadMoreView.status = isLoading ? Load_Loading : Load_LoadingDone;
     

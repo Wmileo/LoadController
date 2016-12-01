@@ -49,8 +49,6 @@ typedef NS_ENUM(NSInteger, Load_Direction){
 //加载状态
 @property (nonatomic, assign) BOOL isLoading;
 
--(void)setIsLoading:(BOOL)isLoading direction:(Load_Direction)direction afterTime:(NSTimeInterval)time;
-
 -(void)disappearLoadBottom;
 -(void)showLoadTop;
 -(void)disappearLoadTop;
