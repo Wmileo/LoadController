@@ -17,12 +17,16 @@ typedef NS_ENUM(NSInteger, Load_Status){
 
 @protocol LoadView <NSObject>
 
-
+#pragma mark - 自定义需重写以下方法 按需重写
+-(void)showLoadingView;
+-(void)showPullingView;
+-(void)showShouldLoadView;
+-(void)showLoadingDoneView;
 
 @end
 
 
-@interface LoadMoreView : UIView
+@interface LoadMoreView : UIView <LoadView>
 
 @property (nonatomic, assign) Load_Status status;
 @property (nonatomic, assign) CGFloat offset;//拉出的距离
@@ -37,11 +41,5 @@ typedef NS_ENUM(NSInteger, Load_Status){
 @property (nonatomic, copy) NSString *tipsLoading;
 @property (nonatomic, copy) NSString *tipsLoadingDone;
 @property (nonatomic, assign) BOOL autoHideTips;//自动关闭提示
-
-#pragma mark - 自定义需重写以下方法 按需重写
--(void)showLoadingView;
--(void)showPullingView;
--(void)showShouldLoadView;
--(void)showLoadingDoneView;
 
 @end
