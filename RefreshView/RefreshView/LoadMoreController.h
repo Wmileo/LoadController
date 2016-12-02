@@ -10,13 +10,6 @@
 #import <UIKit/UIKit.h>
 #import "LoadMoreView.h"
 
-typedef NS_ENUM(NSInteger, Load_Direction){
-    Load_Top,
-    Load_Bottom,
-    Load_Left,
-    Load_Right,
-};
-
 @protocol LoadMoreControllerDelegate <NSObject>
 
 @optional
@@ -38,21 +31,11 @@ typedef NS_ENUM(NSInteger, Load_Direction){
 
 @property (nonatomic, assign) id<LoadMoreControllerDelegate> delegate;
 
-//加载状态
-@property (nonatomic, assign) BOOL isLoading;
-
-//yes:当滑动到一定距离时自动加载 no:只有拖动到一定距离时才加载
-@property (nonatomic, assign) BOOL canAutoLoadTop;
-@property (nonatomic, assign) BOOL canAutoLoadBottom;
-@property (nonatomic, assign) BOOL canAutoLoadLeft;
-@property (nonatomic, assign) BOOL canAutoLoadRight;
-
 -(instancetype)initWithScrollView:(UIScrollView *)scrollView;
 
 //
 -(void)disappearLoadBottom;
 -(void)showLoadTop;
 -(void)disappearLoadTop;
-
 
 @end

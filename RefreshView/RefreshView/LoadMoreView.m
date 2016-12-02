@@ -43,6 +43,12 @@
     }
 }
 
+-(BOOL)isLoading{
+    return self.status == Load_Loading;
+}
+
+#pragma mark -
+
 -(void)showLoadingView{
     if (self.autoHideTips) {
         [self.timer setFireDate:[NSDate distantFuture]];

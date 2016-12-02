@@ -42,7 +42,7 @@
     topV.autoHideTips = YES;
     
     [self.tableView setLoadMoreTopView:topV];
-    self.tableView.loadMoreController.canAutoLoadTop = NO;
+//    self.tableView.loadMoreController.canAutoLoadTop = NO;
 //    self.loadMore.canAutoLoadTop = NO;
 //    [self.loadMore showLoadTop];
 //    self.loadMore.loadTopView = nil;
