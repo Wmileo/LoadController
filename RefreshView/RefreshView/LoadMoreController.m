@@ -317,11 +317,13 @@
     CGFloat y = self.scrollView.contentOffset.y;
     if ([self canLoadWithCurrentVelocityY]) {
         if (self.loadTopView &&
+            !self.loadTopView.isLoadComplete &&
             !self.loadTopView.canAutoLoad &&
-            y <= -CGRectGetHeight(self.loadTopView.frame)) {
+            (y <= -CGRectGetHeight(self.loadTopView.frame))) {
             //top
             [self loadMoreTop];
         }else if (self.loadBottomView &&
+                  !self.loadBottomView.isLoadComplete &&
                   !self.loadBottomView.canAutoLoad &&
                   (y + CGRectGetHeight(self.scrollView.frame)) >= (CGRectGetHeight(self.loadBottomView.frame) + self.scrollView.contentSize.height)) {
             //bottom
@@ -332,11 +334,13 @@
     CGFloat x = self.scrollView.contentOffset.x;
     if ([self canLoadWithCurrentVelocityX]) {
         if (self.loadLeftView &&
+            !self.loadLeftView.isLoadComplete &&
             !self.loadLeftView.canAutoLoad &&
-            x <= -CGRectGetWidth(self.loadLeftView.frame)) {
+            (x <= -CGRectGetWidth(self.loadLeftView.frame))) {
             //left
             [self loadMoreLeft];
         }else if (self.loadRightView &&
+                  !self.loadRightView.isLoadComplete &&
                   !self.loadRightView.canAutoLoad &&
                   (x + CGRectGetWidth(self.scrollView.frame)) >= (CGRectGetWidth(self.loadRightView.frame) + self.scrollView.contentSize.width)) {
             //right
