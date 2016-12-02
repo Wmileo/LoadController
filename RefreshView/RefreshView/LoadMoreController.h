@@ -38,6 +38,9 @@ typedef NS_ENUM(NSInteger, Load_Direction){
 
 @property (nonatomic, assign) id<LoadMoreControllerDelegate> delegate;
 
+//加载状态
+@property (nonatomic, assign) BOOL isLoading;
+
 //yes:当滑动到一定距离时自动加载 no:只有拖动到一定距离时才加载
 @property (nonatomic, assign) BOOL canAutoLoadTop;
 @property (nonatomic, assign) BOOL canAutoLoadBottom;
@@ -46,9 +49,7 @@ typedef NS_ENUM(NSInteger, Load_Direction){
 
 -(instancetype)initWithScrollView:(UIScrollView *)scrollView;
 
-//加载状态
-@property (nonatomic, assign) BOOL isLoading;
-
+//
 -(void)disappearLoadBottom;
 -(void)showLoadTop;
 -(void)disappearLoadTop;
