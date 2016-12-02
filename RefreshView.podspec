@@ -10,7 +10,7 @@ Pod::Spec.new do |s|
                    DESC
 
   s.homepage     = "https://github.com/Wmileo/RefreshView"
- 
+
   s.license      = "MIT"
   # s.license      = { :type => "MIT", :file => "FILE_LICENSE" }
 
