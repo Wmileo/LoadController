@@ -6,6 +6,8 @@
 //  Copyright (c) 2015年 ileo. All rights reserved.
 //
 
+#define TIMER_DURATION @"duration"
+
 #import "LoadMoreController.h"
 
 @interface LoadMoreController()
@@ -101,12 +103,12 @@
 
 -(void)disappearLoadTop{
     self.loadTopView.status = Load_LoadingDone;
-    [self animationToNormal];
+    [self animationToNormalWithDuration:self.loadTopView.recoverDuration];
 }
 
 -(void)disappearLoadBottom{
     self.loadBottomView.status = Load_LoadingDone;
-    [self animationToNormal];
+    [self animationToNormalWithDuration:self.loadBottomView.recoverDuration];
 }
 
 #pragma mark - top
@@ -130,7 +132,7 @@
         [self.scrollView setContentOffset:offset];
         self.scrollView.contentInset = UIEdgeInsetsZero;
     }else if (top != 0) {
-        [NSTimer scheduledTimerWithTimeInterval:0.4 target:self selector:@selector(animationToNormal) userInfo:nil repeats:NO];
+        [NSTimer scheduledTimerWithTimeInterval:self.loadTopView.recoverDelay target:self selector:@selector(animationToNormalTimer:) userInfo:@{TIMER_DURATION : @(self.loadTopView.recoverDuration)} repeats:NO];
     }
 }
 
@@ -146,7 +148,7 @@
 }
 -(void)loadBottomFinish{
     self.loadBottomView.status = Load_LoadingDone;
-    [NSTimer scheduledTimerWithTimeInterval:0.4 target:self selector:@selector(animationToNormal) userInfo:nil repeats:NO];
+    [NSTimer scheduledTimerWithTimeInterval:self.loadBottomView.recoverDelay target:self selector:@selector(animationToNormalTimer:) userInfo:@{TIMER_DURATION : @(self.loadBottomView.recoverDuration)} repeats:NO];
 }
 
 #pragma mark - left
@@ -168,7 +170,7 @@
         [self.scrollView setContentOffset:offset];
         self.scrollView.contentInset = UIEdgeInsetsZero;
     }else if (left != 0) {
-        [NSTimer scheduledTimerWithTimeInterval:0.4 target:self selector:@selector(animationToNormal) userInfo:nil repeats:NO];
+        [NSTimer scheduledTimerWithTimeInterval:self.loadLeftView.recoverDelay target:self selector:@selector(animationToNormalTimer:) userInfo:@{TIMER_DURATION : @(self.loadLeftView.recoverDuration)} repeats:NO];
     }
 }
 
@@ -184,7 +186,7 @@
 }
 -(void)loadRightFinish{
     self.loadRightView.status = Load_LoadingDone;
-    [NSTimer scheduledTimerWithTimeInterval:0.4 target:self selector:@selector(animationToNormal) userInfo:nil repeats:NO];
+    [NSTimer scheduledTimerWithTimeInterval:self.loadRightView.recoverDelay target:self selector:@selector(animationToNormalTimer:) userInfo:@{TIMER_DURATION : @(self.loadRightView.recoverDuration)} repeats:NO];
 }
 
 #pragma mark - kvc
@@ -258,7 +260,6 @@
     }else if (self.scrollView.contentInset.top != 0 || self.scrollView.contentInset.bottom != 0){
         self.scrollView.contentInset = UIEdgeInsetsZero;
     }
-    
     
     if ((x < 0) && self.loadLeftView && !self.loadLeftView.isLoadComplete) {
 //left
@@ -361,12 +362,15 @@
 }
 
 #pragma mark - animation
--(void)animationToNormal{
+-(void)animationToNormalWithDuration:(double)duration{
     __weak __typeof(self) wself = self;
-    [UIView animateWithDuration:0.15 animations:^{
+    [UIView animateWithDuration:duration animations:^{
         wself.scrollView.contentInset = UIEdgeInsetsZero;
     }];
 }
 
+-(void)animationToNormalTimer:(NSTimer *)timer{
+    [self animationToNormalWithDuration:[timer.userInfo[TIMER_DURATION] doubleValue]];
+}
 
 @end

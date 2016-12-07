@@ -16,6 +16,26 @@
 
 @implementation LoadMoreView
 
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
+        self.recoverDelay = 0.4;
+        self.recoverDuration = 0.15;
+    }
+    return self;
+}
+
+- (instancetype)initWithFrame:(CGRect)frame
+{
+    self = [super initWithFrame:frame];
+    if (self) {
+        self.recoverDelay = 0.4;
+        self.recoverDuration = 0.15;
+    }
+    return self;
+}
+
 -(UIScrollView *)superScrollView{
     return (UIScrollView *)self.superview;
 }

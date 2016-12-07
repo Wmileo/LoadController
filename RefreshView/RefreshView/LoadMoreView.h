@@ -40,6 +40,10 @@ typedef NS_ENUM(NSInteger, Load_Status){
 //是否加载完整  加载完整就不再检测位移
 @property (nonatomic, assign) BOOL isLoadComplete;
 
+#pragma mark - 加载完恢复动画时间
+@property (nonatomic, assign) double recoverDuration;//默认0.15
+@property (nonatomic, assign) double recoverDelay;//默认0.4
+
 #pragma mark - 如果自定义的话 不用管这些属性
 @property (nonatomic, strong) UIActivityIndicatorView *waitView;
 @property (nonatomic, strong) UILabel *tipsL;
