@@ -6,15 +6,15 @@
 //  Copyright (c) 2015年 ileo. All rights reserved.
 //
 
-#import "LoadMoreView.h"
+#import "LoadView.h"
 
-@interface LoadMoreView()
+@interface LoadView()
 
 @property (nonatomic, strong) NSTimer *timer;
 
 @end
 
-@implementation LoadMoreView
+@implementation LoadView
 
 - (instancetype)init
 {

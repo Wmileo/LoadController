@@ -14,9 +14,9 @@
 		7E3FEFD41B26E6610003ADD4 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7E3FEFD31B26E6610003ADD4 /* Images.xcassets */; };
 		7E3FEFD71B26E6610003ADD4 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7E3FEFD51B26E6610003ADD4 /* LaunchScreen.xib */; };
 		7E3FEFE31B26E6610003ADD4 /* RefreshViewTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E3FEFE21B26E6610003ADD4 /* RefreshViewTests.m */; };
-		7E3FEFF51B297E990003ADD4 /* LoadMoreController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E3FEFF41B297E990003ADD4 /* LoadMoreController.m */; };
-		7EB497211CAE1DEB00F9B64E /* UIScrollView+LoadMore.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB497201CAE1DEB00F9B64E /* UIScrollView+LoadMore.m */; };
-		7EE9B5DF1B32934A0081B4FD /* LoadMoreView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EE9B5DE1B32934A0081B4FD /* LoadMoreView.m */; };
+		7E3FEFF51B297E990003ADD4 /* LoadController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E3FEFF41B297E990003ADD4 /* LoadController.m */; };
+		7EB497211CAE1DEB00F9B64E /* UIScrollView+Load.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB497201CAE1DEB00F9B64E /* UIScrollView+Load.m */; };
+		7EE9B5DF1B32934A0081B4FD /* LoadView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EE9B5DE1B32934A0081B4FD /* LoadView.m */; };
 		B32F76271DF0113B004481B3 /* LMView.m in Sources */ = {isa = PBXBuildFile; fileRef = B32F76261DF0113B004481B3 /* LMView.m */; };
 		B32F76291DF0518A004481B3 /* LoadController.podspec in Resources */ = {isa = PBXBuildFile; fileRef = B32F76281DF0518A004481B3 /* LoadController.podspec */; };
 /* End PBXBuildFile section */
@@ -45,12 +45,12 @@
 		7E3FEFDC1B26E6610003ADD4 /* RefreshViewTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RefreshViewTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		7E3FEFE11B26E6610003ADD4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7E3FEFE21B26E6610003ADD4 /* RefreshViewTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RefreshViewTests.m; sourceTree = "<group>"; };
-		7E3FEFF31B297E990003ADD4 /* LoadMoreController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LoadMoreController.h; path = RefreshView/LoadMoreController.h; sourceTree = "<group>"; };
-		7E3FEFF41B297E990003ADD4 /* LoadMoreController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LoadMoreController.m; path = RefreshView/LoadMoreController.m; sourceTree = "<group>"; };
-		7EB4971F1CAE1DEB00F9B64E /* UIScrollView+LoadMore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIScrollView+LoadMore.h"; path = "RefreshView/UIScrollView+LoadMore.h"; sourceTree = "<group>"; };
-		7EB497201CAE1DEB00F9B64E /* UIScrollView+LoadMore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIScrollView+LoadMore.m"; path = "RefreshView/UIScrollView+LoadMore.m"; sourceTree = "<group>"; };
-		7EE9B5DD1B32934A0081B4FD /* LoadMoreView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LoadMoreView.h; path = RefreshView/LoadMoreView.h; sourceTree = "<group>"; };
-		7EE9B5DE1B32934A0081B4FD /* LoadMoreView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LoadMoreView.m; path = RefreshView/LoadMoreView.m; sourceTree = "<group>"; };
+		7E3FEFF31B297E990003ADD4 /* LoadController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LoadController.h; path = RefreshView/LoadController.h; sourceTree = "<group>"; };
+		7E3FEFF41B297E990003ADD4 /* LoadController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LoadController.m; path = RefreshView/LoadController.m; sourceTree = "<group>"; };
+		7EB4971F1CAE1DEB00F9B64E /* UIScrollView+Load.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIScrollView+Load.h"; path = "RefreshView/UIScrollView+Load.h"; sourceTree = "<group>"; };
+		7EB497201CAE1DEB00F9B64E /* UIScrollView+Load.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIScrollView+Load.m"; path = "RefreshView/UIScrollView+Load.m"; sourceTree = "<group>"; };
+		7EE9B5DD1B32934A0081B4FD /* LoadView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LoadView.h; path = RefreshView/LoadView.h; sourceTree = "<group>"; };
+		7EE9B5DE1B32934A0081B4FD /* LoadView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LoadView.m; path = RefreshView/LoadView.m; sourceTree = "<group>"; };
 		B32F76251DF0113B004481B3 /* LMView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LMView.h; sourceTree = "<group>"; };
 		B32F76261DF0113B004481B3 /* LMView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LMView.m; sourceTree = "<group>"; };
 		B32F76281DF0518A004481B3 /* LoadController.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LoadController.podspec; sourceTree = "<group>"; };
@@ -140,12 +140,12 @@
 		7E3FEFEC1B26E8E00003ADD4 /* RefreshView */ = {
 			isa = PBXGroup;
 			children = (
-				7E3FEFF31B297E990003ADD4 /* LoadMoreController.h */,
-				7E3FEFF41B297E990003ADD4 /* LoadMoreController.m */,
-				7EE9B5DD1B32934A0081B4FD /* LoadMoreView.h */,
-				7EE9B5DE1B32934A0081B4FD /* LoadMoreView.m */,
-				7EB4971F1CAE1DEB00F9B64E /* UIScrollView+LoadMore.h */,
-				7EB497201CAE1DEB00F9B64E /* UIScrollView+LoadMore.m */,
+				7E3FEFF31B297E990003ADD4 /* LoadController.h */,
+				7E3FEFF41B297E990003ADD4 /* LoadController.m */,
+				7EE9B5DD1B32934A0081B4FD /* LoadView.h */,
+				7EE9B5DE1B32934A0081B4FD /* LoadView.m */,
+				7EB4971F1CAE1DEB00F9B64E /* UIScrollView+Load.h */,
+				7EB497201CAE1DEB00F9B64E /* UIScrollView+Load.m */,
 			);
 			name = RefreshView;
 			sourceTree = "<group>";
@@ -194,7 +194,7 @@
 		7E3FEFBB1B26E6600003ADD4 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0630;
+				LastUpgradeCheck = 0810;
 				ORGANIZATIONNAME = ileo;
 				TargetAttributes = {
 					7E3FEFC21B26E6600003ADD4 = {
@@ -254,9 +254,9 @@
 			files = (
 				7E3FEFCF1B26E6610003ADD4 /* ViewController.m in Sources */,
 				7E3FEFCC1B26E6610003ADD4 /* AppDelegate.m in Sources */,
-				7EE9B5DF1B32934A0081B4FD /* LoadMoreView.m in Sources */,
-				7E3FEFF51B297E990003ADD4 /* LoadMoreController.m in Sources */,
-				7EB497211CAE1DEB00F9B64E /* UIScrollView+LoadMore.m in Sources */,
+				7EE9B5DF1B32934A0081B4FD /* LoadView.m in Sources */,
+				7E3FEFF51B297E990003ADD4 /* LoadController.m in Sources */,
+				7EB497211CAE1DEB00F9B64E /* UIScrollView+Load.m in Sources */,
 				7E3FEFC91B26E6610003ADD4 /* main.m in Sources */,
 				B32F76271DF0113B004481B3 /* LMView.m in Sources */,
 			);
@@ -313,14 +313,17 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -356,8 +359,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -386,8 +391,9 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 9J6JH9B3QM;
 				INFOPLIST_FILE = RefreshView/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.ileo.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -398,8 +404,9 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 9J6JH9B3QM;
 				INFOPLIST_FILE = RefreshView/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.ileo.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
@@ -418,6 +425,7 @@
 				);
 				INFOPLIST_FILE = RefreshViewTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.ileo.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/RefreshView.app/RefreshView";
 			};
@@ -433,6 +441,7 @@
 				);
 				INFOPLIST_FILE = RefreshViewTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.ileo.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/RefreshView.app/RefreshView";
 			};

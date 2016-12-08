@@ -26,7 +26,7 @@ typedef NS_ENUM(NSInteger, Load_Status){
 @end
 
 
-@interface LoadMoreView : UIView <LoadView>
+@interface LoadView : UIView <LoadView>
 
 @property (nonatomic, assign) Load_Status status;
 @property (nonatomic, assign) CGFloat offset;//拉出的距离

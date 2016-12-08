@@ -6,8 +6,8 @@
 //  Copyright © 2016年 ileo. All rights reserved.
 //
 
-#import "LoadMoreView.h"
+#import "LoadView.h"
 
-@interface LMView : LoadMoreView
+@interface LMView : LoadView
 
 @end

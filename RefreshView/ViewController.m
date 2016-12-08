@@ -7,10 +7,10 @@
 //
 
 #import "ViewController.h"
-#import "UIScrollView+LoadMore.h"
+#import "UIScrollView+Load.h"
 #import "LMView.h"
 
-@interface ViewController () <UITableViewDataSource, UITableViewDelegate, LoadMoreControllerDelegate>
+@interface ViewController () <UITableViewDataSource, UITableViewDelegate, LoadControllerDelegate>
 
 @property (nonatomic, strong) UITableView *tableView;
 
@@ -34,9 +34,9 @@
     self.tableView.dataSource = self;
     [self.tableView reloadData];
     
-    [self.tableView setLoadMoreDelegate:self];
+    [self.tableView setLoadDelegate:self];
     
-//    self.loadMore.loadBottomView = view;
+//    self.load.loadBottomView = view;
     LMView *topV = [[LMView alloc] initWithFrame:CGRectMake(0, 0, 320, 40)];
     topV.tipsLoading = @"加载中";
     topV.tipsLoadingDone = @"加载完成";
@@ -45,11 +45,11 @@
     topV.autoHideTips = YES;
     topV.canAutoLoad = YES;
     
-    [self.tableView setLoadMoreTopView:topV];
-//    self.tableView.loadMoreController.canAutoLoadTop = NO;
-//    self.loadMore.canAutoLoadTop = NO;
-//    [self.loadMore showLoadTop];
-//    self.loadMore.loadTopView = nil;
+    [self.tableView setLoadTopView:topV];
+//    self.tableView.loadController.canAutoLoadTop = NO;
+//    self.load.canAutoLoadTop = NO;
+//    [self.load showLoadTop];
+//    self.load.loadTopView = nil;
 //    [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(endLoading) userInfo:nil repeats:NO];
 
     // Do any additional setup after loading the view, typically from a nib.
@@ -61,16 +61,16 @@
 }
 
 -(void)endLoading{
-    [self.tableView.loadMoreController disappearLoadBottom];
+    [self.tableView.loadController disappearLoadBottom];
 }
 
-#pragma mark - loadMore
+#pragma mark - load
 
--(void)loadMoreBottomFinish:(void (^)())finish withScrollView:(UIScrollView *)scrollView{
+-(void)loadBottomFinish:(void (^)())finish withScrollView:(UIScrollView *)scrollView{
     [NSTimer scheduledTimerWithTimeInterval:0 target:self selector:@selector(loadFinish:) userInfo:@{@"finish":finish} repeats:NO];
 }
 
--(void)loadMoreTopFinish:(void (^)(CGFloat))finish withScrollView:(UIScrollView *)scrollView{
+-(void)loadTopFinish:(void (^)(CGFloat))finish withScrollView:(UIScrollView *)scrollView{
     self.num += 50;
     self.firnum -= 50;
     [self.tableView reloadData];
@@ -80,19 +80,19 @@
     }
 //    [NSTimer scheduledTimerWithTimeInterval:0 target:self selector:@selector(loadFinish:) userInfo:@{@"finish":finish} repeats:NO];
 }
-//-(void)loadMoreBottomAutoLoadFinish:(void (^)())finish{
+//-(void)loadBottomAutoLoadFinish:(void (^)())finish{
 //    [NSTimer scheduledTimerWithTimeInterval:0.5 target:self selector:@selector(loadFinishAuto:) userInfo:@{@"finish":finish} repeats:NO];
 //}
 //
-//-(void)loadMoreBottomLoadFinish:(void (^)())finish{
+//-(void)loadBottomLoadFinish:(void (^)())finish{
 //    [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(loadFinish:) userInfo:@{@"finish":finish} repeats:NO];
 //}
 
-//-(void)loadMoreTopAutoLoadFinish:(void (^)(CGFloat))finish{
+//-(void)loadTopAutoLoadFinish:(void (^)(CGFloat))finish{
 //    [NSTimer scheduledTimerWithTimeInterval:0.5 target:self selector:@selector(loadFinishAuto:) userInfo:@{@"finish":finish} repeats:NO];
 //}
 
-//-(void)loadMoreTopLoadFinish:(void (^)(CGFloat))finish{
+//-(void)loadTopLoadFinish:(void (^)(CGFloat))finish{
 //    [NSTimer scheduledTimerWithTimeInterval:0 target:self selector:@selector(loadFinish:) userInfo:@{@"finish":finish} repeats:NO];
 //}
 //
