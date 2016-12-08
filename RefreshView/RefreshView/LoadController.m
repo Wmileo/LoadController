@@ -233,11 +233,11 @@
                 inset.top = 0;
             }
         }
-//        if (inset.top != self.scrollView.contentInset.top) {
-//            [UIView animateWithDuration:0.1 animations:^{
+        if (inset.top != self.scrollView.contentInset.top) {
+            [UIView animateWithDuration:0.1 animations:^{
                 self.scrollView.contentInset = inset;
-//            }];
-//        }
+            }];
+        }
     }else if ((y+CGRectGetHeight(self.scrollView.frame) > self.scrollView.contentSize.height) && self.loadBottomView && !self.loadBottomView.isLoadComplete) {
 //bottom
         y = y + CGRectGetHeight(self.scrollView.frame) - self.scrollView.contentSize.height;
@@ -277,11 +277,11 @@
                 inset.left = 0;
             }
         }
-//        if (inset.left != self.scrollView.contentInset.left) {
-//            [UIView animateWithDuration:0.1 animations:^{
+        if (inset.left != self.scrollView.contentInset.left) {
+            [UIView animateWithDuration:0.1 animations:^{//防止突变 
                 self.scrollView.contentInset = inset;
-//            }];
-//        }
+            }];
+        }
     }else if ((x+CGRectGetWidth(self.scrollView.frame) > self.scrollView.contentSize.width) && self.loadRightView && !self.loadRightView.isLoadComplete) {
 //right
         x = x + CGRectGetWidth(self.scrollView.frame) - self.scrollView.contentSize.width;
