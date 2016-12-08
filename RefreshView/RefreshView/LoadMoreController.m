@@ -281,7 +281,7 @@
 //            [UIView animateWithDuration:0.1 animations:^{
                 self.scrollView.contentInset = inset;
 //            }];
-        }
+//        }
     }else if ((x+CGRectGetWidth(self.scrollView.frame) > self.scrollView.contentSize.width) && self.loadRightView && !self.loadRightView.isLoadComplete) {
 //right
         x = x + CGRectGetWidth(self.scrollView.frame) - self.scrollView.contentSize.width;
