@@ -1,8 +1,8 @@
 
 Pod::Spec.new do |s|
 
-  s.name         = "RefreshView"
-  s.version      = "0.3.4"
+  s.name         = "LoadController"
+  s.version      = "0.0.1"
   s.summary      = "用于UIScrollView的上拉下拉加载数据"
 
   s.description  = <<-DESC

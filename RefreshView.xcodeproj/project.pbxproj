@@ -18,7 +18,7 @@
 		7EB497211CAE1DEB00F9B64E /* UIScrollView+LoadMore.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB497201CAE1DEB00F9B64E /* UIScrollView+LoadMore.m */; };
 		7EE9B5DF1B32934A0081B4FD /* LoadMoreView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EE9B5DE1B32934A0081B4FD /* LoadMoreView.m */; };
 		B32F76271DF0113B004481B3 /* LMView.m in Sources */ = {isa = PBXBuildFile; fileRef = B32F76261DF0113B004481B3 /* LMView.m */; };
-		B32F76291DF0518A004481B3 /* RefreshView.podspec in Resources */ = {isa = PBXBuildFile; fileRef = B32F76281DF0518A004481B3 /* RefreshView.podspec */; };
+		B32F76291DF0518A004481B3 /* LoadController.podspec in Resources */ = {isa = PBXBuildFile; fileRef = B32F76281DF0518A004481B3 /* LoadController.podspec */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,7 +53,7 @@
 		7EE9B5DE1B32934A0081B4FD /* LoadMoreView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LoadMoreView.m; path = RefreshView/LoadMoreView.m; sourceTree = "<group>"; };
 		B32F76251DF0113B004481B3 /* LMView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LMView.h; sourceTree = "<group>"; };
 		B32F76261DF0113B004481B3 /* LMView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LMView.m; sourceTree = "<group>"; };
-		B32F76281DF0518A004481B3 /* RefreshView.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = RefreshView.podspec; sourceTree = "<group>"; };
+		B32F76281DF0518A004481B3 /* LoadController.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LoadController.podspec; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,7 +77,7 @@
 		7E3FEFBA1B26E6600003ADD4 = {
 			isa = PBXGroup;
 			children = (
-				B32F76281DF0518A004481B3 /* RefreshView.podspec */,
+				B32F76281DF0518A004481B3 /* LoadController.podspec */,
 				7E3FEFC51B26E6600003ADD4 /* RefreshView */,
 				7E3FEFDF1B26E6610003ADD4 /* RefreshViewTests */,
 				7E3FEFC41B26E6600003ADD4 /* Products */,
@@ -232,7 +232,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7E3FEFD21B26E6610003ADD4 /* Main.storyboard in Resources */,
-				B32F76291DF0518A004481B3 /* RefreshView.podspec in Resources */,
+				B32F76291DF0518A004481B3 /* LoadController.podspec in Resources */,
 				7E3FEFD71B26E6610003ADD4 /* LaunchScreen.xib in Resources */,
 				7E3FEFD41B26E6610003ADD4 /* Images.xcassets in Resources */,
 			);
