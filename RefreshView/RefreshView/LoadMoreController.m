@@ -233,12 +233,11 @@
                 inset.top = 0;
             }
         }
-        if (inset.top != self.scrollView.contentInset.top) {
-            __weak __typeof(self) wself = self;
-            [UIView animateWithDuration:0.1 animations:^{
-                wself.scrollView.contentInset = inset;
-            }];
-        }
+//        if (inset.top != self.scrollView.contentInset.top) {
+//            [UIView animateWithDuration:0.1 animations:^{
+                self.scrollView.contentInset = inset;
+//            }];
+//        }
     }else if ((y+CGRectGetHeight(self.scrollView.frame) > self.scrollView.contentSize.height) && self.loadBottomView && !self.loadBottomView.isLoadComplete) {
 //bottom
         y = y + CGRectGetHeight(self.scrollView.frame) - self.scrollView.contentSize.height;
@@ -278,11 +277,10 @@
                 inset.left = 0;
             }
         }
-        if (inset.left != self.scrollView.contentInset.left) {
-            __weak __typeof(self) wself = self;
-            [UIView animateWithDuration:0.1 animations:^{
-                wself.scrollView.contentInset = inset;
-            }];
+//        if (inset.left != self.scrollView.contentInset.left) {
+//            [UIView animateWithDuration:0.1 animations:^{
+                self.scrollView.contentInset = inset;
+//            }];
         }
     }else if ((x+CGRectGetWidth(self.scrollView.frame) > self.scrollView.contentSize.width) && self.loadRightView && !self.loadRightView.isLoadComplete) {
 //right
@@ -363,9 +361,8 @@
 
 #pragma mark - animation
 -(void)animationToNormalWithDuration:(double)duration{
-    __weak __typeof(self) wself = self;
     [UIView animateWithDuration:duration animations:^{
-        wself.scrollView.contentInset = UIEdgeInsetsZero;
+        self.scrollView.contentInset = UIEdgeInsetsZero;
     }];
 }
 

@@ -15,6 +15,8 @@
 @property (nonatomic, strong) UITableView *tableView;
 
 @property (nonatomic, assign) NSInteger num;
+@property (nonatomic, assign) NSInteger firnum;
+
 
 @end
 
@@ -23,7 +25,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.num = 3;
+    self.num = 100;
+    self.firnum = 50;
     self.view.backgroundColor = [UIColor yellowColor];
     self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 50, 320, 400)];
     [self.view addSubview:self.tableView];
@@ -40,6 +43,7 @@
     topV.tipsPulling = @"下拉加载";
     topV.tipsShouldLoad = @"松手加载";
     topV.autoHideTips = YES;
+    topV.canAutoLoad = YES;
     
     [self.tableView setLoadMoreTopView:topV];
 //    self.tableView.loadMoreController.canAutoLoadTop = NO;
@@ -67,7 +71,14 @@
 }
 
 -(void)loadMoreTopFinish:(void (^)(CGFloat))finish withScrollView:(UIScrollView *)scrollView{
-    [NSTimer scheduledTimerWithTimeInterval:0 target:self selector:@selector(loadFinish:) userInfo:@{@"finish":finish} repeats:NO];
+    self.num += 50;
+    self.firnum -= 50;
+    [self.tableView reloadData];
+    
+    if (finish) {
+        finish(50);
+    }
+//    [NSTimer scheduledTimerWithTimeInterval:0 target:self selector:@selector(loadFinish:) userInfo:@{@"finish":finish} repeats:NO];
 }
 //-(void)loadMoreBottomAutoLoadFinish:(void (^)())finish{
 //    [NSTimer scheduledTimerWithTimeInterval:0.5 target:self selector:@selector(loadFinishAuto:) userInfo:@{@"finish":finish} repeats:NO];
@@ -108,21 +119,21 @@
     [self.tableView reloadData];
     
     if (finish) {
-        finish(0);
+        finish(50);
     }
 }
 
 #pragma mark - tableView
 
--(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    return self.num;
-}
--(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
-    return 50;
-}
+//-(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
+//    return self.num;
+//}
+//-(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
+//    return 50;
+//}
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return 4;
+    return self.num;
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -137,7 +148,7 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellID];
     }
     
-    cell.textLabel.text = [NSString stringWithFormat:@"%zd",indexPath.section];
+    cell.textLabel.text = [NSString stringWithFormat:@"%zd",indexPath.row + self.firnum];
     
     return cell;
 }
