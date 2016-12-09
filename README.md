@@ -4,7 +4,7 @@
 
 ##INSTALL
 
-pod 'LoadController'
+    pod 'LoadController'
 
 ##how to use
 
