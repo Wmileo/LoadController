@@ -13,10 +13,6 @@
 
 static char loadControllerKey;
 
--(void)setLoadDelegate:(id<LoadControllerDelegate>)loadDelegate{
-    self.loadController.delegate = loadDelegate;
-}
-
 -(void)setLoadController:(LoadController *)loadController{
     objc_setAssociatedObject(self, &loadControllerKey, loadController, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
@@ -30,20 +26,44 @@ static char loadControllerKey;
     return load;
 }
 
--(void)setLoadTopView:(LoadView *)loadView{
-    self.loadController.loadTopView = loadView;
+-(void)setLoadDelegate:(id<LoadControllerDelegate>)loadDelegate{
+    self.loadController.delegate = loadDelegate;
 }
 
--(void)setLoadBottomView:(LoadView *)loadView{
-    self.loadController.loadBottomView = loadView;
+-(id<LoadControllerDelegate>)loadDelegate{
+    return self.loadController.delegate;
 }
 
--(void)setLoadLeftView:(LoadView *)loadView{
-    self.loadController.loadLeftView = loadView;
+-(void)setLoadTopView:(LoadView *)loadTopView{
+    self.loadController.loadTopView = loadTopView;
 }
 
--(void)setLoadRightView:(LoadView *)loadView{
-    self.loadController.loadRightView = loadView;
+-(LoadView *)loadTopView{
+    return self.loadController.loadTopView;
+}
+
+-(void)setLoadBottomView:(LoadView *)loadBottomView{
+    self.loadController.loadBottomView = loadBottomView;
+}
+
+-(LoadView *)loadBottomView{
+    return self.loadController.loadBottomView;
+}
+
+-(void)setLoadLeftView:(LoadView *)loadLeftView{
+    self.loadController.loadLeftView = loadLeftView;
+}
+
+-(LoadView *)loadLeftView{
+    return self.loadController.loadLeftView;
+}
+
+-(void)setLoadRightView:(LoadView *)loadRightView{
+    self.loadController.loadRightView = loadRightView;
+}
+
+-(LoadView *)loadRightView{
+    return self.loadController.loadRightView;
 }
 
 @end

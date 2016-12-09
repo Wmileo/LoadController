@@ -13,11 +13,11 @@
 
 @property (nonatomic, strong) LoadController *loadController;
 
--(void)setLoadDelegate:(id<LoadControllerDelegate>)loadDelegate;
+@property (nonatomic, weak) id<LoadControllerDelegate> loadDelegate;
 
--(void)setLoadTopView:(LoadView *)loadView;
--(void)setLoadBottomView:(LoadView *)loadView;
--(void)setLoadLeftView:(LoadView *)loadView;
--(void)setLoadRightView:(LoadView *)loadView;
+@property (nonatomic, strong) LoadView *loadTopView;
+@property (nonatomic, strong) LoadView *loadBottomView;
+@property (nonatomic, strong) LoadView *loadLeftView;
+@property (nonatomic, strong) LoadView *loadRightView;
 
 @end
