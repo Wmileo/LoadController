@@ -9,7 +9,7 @@ Pod::Spec.new do |s|
                    用于UIScrollView的上拉下拉加载数据.
                    DESC
 
-  s.homepage     = "https://github.com/Wmileo/RefreshView"
+  s.homepage     = "https://github.com/Wmileo/LoadController"
 
   s.license      = "MIT"
   # s.license      = { :type => "MIT", :file => "FILE_LICENSE" }
@@ -22,7 +22,7 @@ Pod::Spec.new do |s|
   # s.platform     = :ios
   s.platform     = :ios, "7.0"
 
-  s.source       = { :git => "https://github.com/Wmileo/RefreshView.git", :tag => s.version.to_s }
+  s.source       = { :git => "https://github.com/Wmileo/LoadController.git", :tag => s.version.to_s }
 
 
   s.source_files  = "RefreshView/RefreshView/*.{h,m}"
