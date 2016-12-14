@@ -2,7 +2,7 @@
 
 加载控制器，方便在UIScrollView添加滑动加载操作
 
-##INSTALL
+##Install
 
     pod 'LoadController'
 
