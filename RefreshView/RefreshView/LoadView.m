@@ -130,4 +130,8 @@
     self.tipsL.hidden = YES;
 }
 
+-(void)setTipsHidden:(BOOL)hidden{
+    self.tipsL.hidden = hidden;
+}
+
 @end
