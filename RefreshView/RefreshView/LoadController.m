@@ -30,7 +30,6 @@
     self = [super init];
     if (self) {
         self.scrollView = scrollView;
-        
         [self.scrollView addObserver:self
                           forKeyPath:@"contentOffset"
                              options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld
@@ -350,13 +349,19 @@
 }
 
 -(BOOL)canLoadWithCurrentVelocityY{
-    CGFloat velocityY = [self.scrollView.panGestureRecognizer velocityInView:self.scrollView].y;
-    return velocityY < 1000 && velocityY > -1000;
+    if (self.loadShouldPause) {
+        CGFloat velocityY = [self.scrollView.panGestureRecognizer velocityInView:self.scrollView].y;
+        return velocityY < 1000 && velocityY > -1000;
+    }
+    return YES;
 }
 
 -(BOOL)canLoadWithCurrentVelocityX{
-    CGFloat velocityX = [self.scrollView.panGestureRecognizer velocityInView:self.scrollView].x;
-    return velocityX < 1000 && velocityX > -1000;
+    if (self.loadShouldPause) {
+        CGFloat velocityX = [self.scrollView.panGestureRecognizer velocityInView:self.scrollView].x;
+        return velocityX < 1000 && velocityX > -1000;
+    }
+    return YES;
 }
 
 #pragma mark - animation

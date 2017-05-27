@@ -30,6 +30,8 @@
 
 @property (nonatomic, assign) id<LoadControllerDelegate> delegate;
 
+@property (nonatomic, assign) BOOL loadShouldPause;//拉动到一定距离需要手指需要停留一下才能加载 默认NO
+
 -(instancetype)initWithScrollView:(UIScrollView *)scrollView;
 
 //
