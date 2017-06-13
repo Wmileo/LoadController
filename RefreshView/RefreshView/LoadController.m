@@ -225,11 +225,23 @@
         }else{
             if (!self.loadTopView.isLoading) {
                 if (inset.top == CGRectGetHeight(self.loadTopView.frame)) {
-                    self.loadTopView.status = Load_ShouldLoad;
+                    if (self.loadShouldPause) {
+                        self.loadTopView.status = Load_ShouldLoad;
+                        inset.top = 0;
+                    }else{
+                        if (self.loadTopView.status != Load_LoadingDone) {
+                            self.loadTopView.status = Load_ShouldLoad;
+                            if (!self.scrollView.isTracking) {
+                                [self loadTop];
+                            }else{
+                                inset.top = 0;
+                            }
+                        }
+                    }
                 }else{
                     self.loadTopView.status = Load_Pulling;
+                    inset.top = 0;
                 }
-                inset.top = 0;
             }
         }
         if (inset.top != self.scrollView.contentInset.top) {
