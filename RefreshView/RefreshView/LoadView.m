@@ -20,8 +20,8 @@
 {
     self = [super init];
     if (self) {
-        self.recoverDelay = 0.4;
-        self.recoverDuration = 0.15;
+        self.recoverDelay = 0.6;
+        self.recoverDuration = 0.2;
     }
     return self;
 }
@@ -30,8 +30,8 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-        self.recoverDelay = 0.4;
-        self.recoverDuration = 0.15;
+        self.recoverDelay = 0.6;
+        self.recoverDuration = 0.2;
     }
     return self;
 }

@@ -17,7 +17,6 @@ typedef NS_ENUM(NSInteger, Load_Status){
 
 @protocol LoadView <NSObject>
 
-#pragma mark - 自定义需重写以下方法 按需重写
 -(void)showLoadingView;
 -(void)showPullingView;
 -(void)showShouldLoadView;
@@ -28,7 +27,8 @@ typedef NS_ENUM(NSInteger, Load_Status){
 
 @interface LoadView : UIView <LoadView>
 
-@property (nonatomic, assign) Load_Status status;
+@property (nonatomic, assign) Load_Status status;//可监听该属性做相应变化
+
 @property (nonatomic, assign) CGFloat offset;//拉出的距离
 
 @property (nonatomic, readonly) UIScrollView *superScrollView;
@@ -41,8 +41,8 @@ typedef NS_ENUM(NSInteger, Load_Status){
 @property (nonatomic, assign) BOOL isLoadComplete;
 
 #pragma mark - 加载完恢复动画时间
-@property (nonatomic, assign) double recoverDuration;//默认0.15
-@property (nonatomic, assign) double recoverDelay;//默认0.4
+@property (nonatomic, assign) double recoverDuration;//默认0.2
+@property (nonatomic, assign) double recoverDelay;//默认0.6
 
 #pragma mark - 如果自定义的话 不用管这些属性
 @property (nonatomic, strong) UIActivityIndicatorView *waitView;

@@ -115,9 +115,11 @@
     if (!self.loadTopView.isLoading && self.delegate && [self.delegate respondsToSelector:@selector(loadTopFinish:withScrollView:)]) {
         self.loadTopView.status = Load_Loading;
         __weak __typeof(self) wself = self;
-        [self.delegate loadTopFinish:^(CGFloat insetHeight) {
-            [wself loadTopFinishWithInsetHeight:insetHeight];
-        } withScrollView:self.scrollView];
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.4 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [wself.delegate loadTopFinish:^(CGFloat insetHeight) {
+                [wself loadTopFinishWithInsetHeight:insetHeight];
+            } withScrollView:wself.scrollView];
+        });
     }
 }
 -(void)loadTopFinishWithInsetHeight:(CGFloat)insetHeight{
