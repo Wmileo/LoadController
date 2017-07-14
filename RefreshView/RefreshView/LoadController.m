@@ -77,7 +77,7 @@
         [self.scrollView setContentOffset:offset];
         self.scrollView.contentInset = UIEdgeInsetsZero;
         self.loadTopView.status = Load_LoadingDone;
-    }else if (top != 0) {
+    }else{
         [self loadFinishWithLoadView:self.loadTopView];
     }
 }
@@ -155,14 +155,14 @@
     CGFloat x = self.scrollView.contentOffset.x;
     
     if ((y < 0) && self.loadTopView && !self.loadTopView.isLoadComplete) {
-//top
+        //top
         y = MAX(y, -CGRectGetHeight(self.loadTopView.frame));
         self.loadTopView.offset = -y;
         UIEdgeInsets inset = UIEdgeInsetsMake(-y, 0, 0, 0);
         if (self.loadTopView.canAutoLoad) {
             [self loadTop];
         }else{
-            if (!self.isLoading) {
+            if (!self.loadTopView.isLoading) {
                 if (inset.top == CGRectGetHeight(self.loadTopView.frame)) {
                     if (self.loadShouldPause) {
                         self.loadTopView.status = Load_ShouldLoad;
@@ -188,8 +188,9 @@
                 self.scrollView.contentInset = inset;
             }];
         }
+        
     }else if ((y+CGRectGetHeight(self.scrollView.frame) > self.scrollView.contentSize.height) && self.loadBottomView && !self.loadBottomView.isLoadComplete) {
-//bottom
+        //bottom
         y = y + CGRectGetHeight(self.scrollView.frame) - self.scrollView.contentSize.height;
         y = MIN(y, CGRectGetHeight(self.loadBottomView.frame));
         self.loadBottomView.offset = y;
@@ -197,7 +198,7 @@
         if (self.loadBottomView.canAutoLoad) {
             [self loadBottom];
         }else{
-            if (!self.isLoading) {
+            if (!self.loadBottomView.isLoading) {
                 if (inset.bottom == CGRectGetHeight(self.loadBottomView.frame)) {
                     self.loadBottomView.status = Load_ShouldLoad;
                 }else{
@@ -211,14 +212,14 @@
     }
     
     if ((x < 0) && self.loadLeftView && !self.loadLeftView.isLoadComplete) {
-//left
+        //left
         x = MAX(x, -CGRectGetWidth(self.loadLeftView.frame));
         self.loadLeftView.offset = -x;
         UIEdgeInsets inset = UIEdgeInsetsMake(0, -x, 0, 0);
         if (self.loadLeftView.canAutoLoad) {
             [self loadLeft];
         }else{
-            if (!self.isLoading) {
+            if (!self.loadLeftView.isLoading) {
                 if (inset.left == CGRectGetWidth(self.loadLeftView.frame)) {
                     self.loadLeftView.status = Load_ShouldLoad;
                 }else{
@@ -228,12 +229,12 @@
             }
         }
         if (inset.left != self.scrollView.contentInset.left) {
-            [UIView animateWithDuration:0.1 animations:^{//防止突变 
+            [UIView animateWithDuration:0.1 animations:^{//防止突变
                 self.scrollView.contentInset = inset;
             }];
         }
     }else if ((x+CGRectGetWidth(self.scrollView.frame) > self.scrollView.contentSize.width) && self.loadRightView && !self.loadRightView.isLoadComplete) {
-//right
+        //right
         x = x + CGRectGetWidth(self.scrollView.frame) - self.scrollView.contentSize.width;
         x = MIN(x, CGRectGetWidth(self.loadRightView.frame));
         self.loadRightView.offset = x;
@@ -241,7 +242,7 @@
         if (self.loadRightView.canAutoLoad) {
             [self loadRight];
         }else{
-            if (!self.isLoading) {
+            if (!self.loadRightView.isLoading) {
                 if (inset.right == CGRectGetWidth(self.loadRightView.frame)) {
                     self.loadRightView.status = Load_ShouldLoad;
                 }else{
@@ -296,7 +297,7 @@
             [self loadRight];
         }
     }
-
+    
 }
 
 -(BOOL)canLoadWithCurrentVelocityY{
