@@ -6,8 +6,6 @@
 //  Copyright (c) 2015年 ileo. All rights reserved.
 //
 
-#define TIMER_DURATION @"duration"
-
 #import "LoadController.h"
 
 @interface LoadController()
@@ -19,11 +17,9 @@
 @implementation LoadController
 
 -(void)dealloc{
-    
     [self.scrollView removeObserver:self forKeyPath:@"contentSize"];
     [self.scrollView removeObserver:self forKeyPath:@"contentOffset"];
     [self.scrollView.panGestureRecognizer removeTarget:self action:@selector(handleScrollViewDrag:)];
-    
 }
 
 -(instancetype)initWithScrollView:(UIScrollView *)scrollView{
@@ -43,55 +39,6 @@
     return self;
 }
 
-#pragma mark - loadview
--(void)setLoadTopView:(LoadView *)loadTopView{
-
-    if (_loadTopView && [self.scrollView.subviews containsObject:_loadTopView]) {
-        [_loadTopView removeFromSuperview];
-    }
-    _loadTopView = loadTopView;
-    CGRect rect = _loadTopView.frame;
-    rect.origin.y = -rect.size.height;
-    _loadTopView.frame = rect;
-    [self.scrollView addSubview:_loadTopView];
-
-}
-
--(void)setLoadBottomView:(LoadView *)loadBottomView{
-
-    if (_loadBottomView && [self.scrollView.subviews containsObject:_loadBottomView]) {
-        [_loadBottomView removeFromSuperview];
-    }
-    _loadBottomView = loadBottomView;
-    CGRect rect = _loadBottomView.frame;
-    rect.origin.y = self.scrollView.contentSize.height;
-    _loadBottomView.frame = rect;
-    [self.scrollView addSubview:_loadBottomView];
-    
-}
-
--(void)setLoadLeftView:(LoadView *)loadLeftView{
-    if (_loadLeftView && [self.scrollView.subviews containsObject:_loadLeftView]) {
-        [_loadLeftView removeFromSuperview];
-    }
-    _loadLeftView = loadLeftView;
-    CGRect rect = _loadLeftView.frame;
-    rect.origin.x = -rect.size.width;
-    _loadLeftView.frame = rect;
-    [self.scrollView addSubview:_loadLeftView];
-}
-
--(void)setLoadRightView:(LoadView *)loadRightView{
-    if (_loadRightView && [self.scrollView.subviews containsObject:_loadRightView]) {
-        [_loadRightView removeFromSuperview];
-    }
-    _loadRightView = loadRightView;
-    CGRect rect = _loadRightView.frame;
-    rect.origin.x = self.scrollView.contentSize.width;
-    _loadRightView.frame = rect;
-    [self.scrollView addSubview:_loadRightView];
-}
-
 #pragma mark -
 -(void)showLoadTop{
     if (self.loadTopView) {
@@ -101,18 +48,16 @@
 }
 
 -(void)disappearLoadTop{
-    self.loadTopView.status = Load_LoadingDone;
-    [self animationToNormalWithDuration:self.loadTopView.recoverDuration];
+    [self loadFinishWithLoadView:self.loadTopView];
 }
 
 -(void)disappearLoadBottom{
-    self.loadBottomView.status = Load_LoadingDone;
-    [self animationToNormalWithDuration:self.loadBottomView.recoverDuration];
+    [self loadFinishWithLoadView:self.loadBottomView];
 }
 
 #pragma mark - top
 -(void)loadTop{
-    if (!self.loadTopView.isLoading && self.delegate && [self.delegate respondsToSelector:@selector(loadTopFinish:withScrollView:)]) {
+    if (!self.isLoading && self.delegate && [self.delegate respondsToSelector:@selector(loadTopFinish:withScrollView:)]) {
         self.loadTopView.status = Load_Loading;
         __weak __typeof(self) wself = self;
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.4 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
@@ -123,7 +68,6 @@
     }
 }
 -(void)loadTopFinishWithInsetHeight:(CGFloat)insetHeight{
-    self.loadTopView.status = Load_LoadingDone;
     CGFloat top = self.scrollView.contentInset.top;
     if (insetHeight != 0) {
         CGPoint offset = CGPointMake(0,
@@ -132,29 +76,26 @@
                                       : insetHeight - top));
         [self.scrollView setContentOffset:offset];
         self.scrollView.contentInset = UIEdgeInsetsZero;
+        self.loadTopView.status = Load_LoadingDone;
     }else if (top != 0) {
-        [NSTimer scheduledTimerWithTimeInterval:self.loadTopView.recoverDelay target:self selector:@selector(animationToNormalTimer:) userInfo:@{TIMER_DURATION : @(self.loadTopView.recoverDuration)} repeats:NO];
+        [self loadFinishWithLoadView:self.loadTopView];
     }
 }
 
 #pragma mark - bottom
 -(void)loadBottom{
-    if (!self.loadBottomView.isLoading && self.delegate && [self.delegate respondsToSelector:@selector(loadBottomFinish:withScrollView:)]) {
+    if (!self.isLoading && self.delegate && [self.delegate respondsToSelector:@selector(loadBottomFinish:withScrollView:)]) {
         self.loadBottomView.status = Load_Loading;
         __weak __typeof(self) wself = self;
         [self.delegate loadBottomFinish:^{
-            [wself loadBottomFinish];
+            [wself loadFinishWithLoadView:wself.loadBottomView];
         } withScrollView:self.scrollView];
     }
-}
--(void)loadBottomFinish{
-    self.loadBottomView.status = Load_LoadingDone;
-    [NSTimer scheduledTimerWithTimeInterval:self.loadBottomView.recoverDelay target:self selector:@selector(animationToNormalTimer:) userInfo:@{TIMER_DURATION : @(self.loadBottomView.recoverDuration)} repeats:NO];
 }
 
 #pragma mark - left
 -(void)loadLeft{
-    if (!self.loadLeftView.isLoading && self.delegate && [self.delegate respondsToSelector:@selector(loadLeftFinish:withScrollView:)]) {
+    if (!self.isLoading && self.delegate && [self.delegate respondsToSelector:@selector(loadLeftFinish:withScrollView:)]) {
         self.loadLeftView.status = Load_Loading;
         __weak __typeof(self) wself = self;
         [self.delegate loadLeftFinish:^(CGFloat insetWidth) {
@@ -164,30 +105,26 @@
 }
 
 -(void)loadLeftFinishWithInsetWidth:(CGFloat)insetWidth{
-    self.loadLeftView.status = Load_LoadingDone;
     CGFloat left = self.scrollView.contentInset.left;
     if (insetWidth != 0) {
         CGPoint offset = CGPointMake((left == 0 ? insetWidth + self.scrollView.contentOffset.x : insetWidth - left), 0);
         [self.scrollView setContentOffset:offset];
         self.scrollView.contentInset = UIEdgeInsetsZero;
+        self.loadLeftView.status = Load_LoadingDone;
     }else if (left != 0) {
-        [NSTimer scheduledTimerWithTimeInterval:self.loadLeftView.recoverDelay target:self selector:@selector(animationToNormalTimer:) userInfo:@{TIMER_DURATION : @(self.loadLeftView.recoverDuration)} repeats:NO];
+        [self loadFinishWithLoadView:self.loadLeftView];
     }
 }
 
 #pragma mark - right
 -(void)loadRight{
-    if (!self.loadRightView.isLoading && self.delegate && [self.delegate respondsToSelector:@selector(loadRightFinish:withScrollView:)]) {
+    if (!self.isLoading && self.delegate && [self.delegate respondsToSelector:@selector(loadRightFinish:withScrollView:)]) {
         self.loadRightView.status = Load_Loading;
         __weak __typeof(self) wself = self;
         [self.delegate loadRightFinish:^{
-            [wself loadRightFinish];
+            [wself loadFinishWithLoadView:wself.loadRightView];
         } withScrollView:self.scrollView];
     }
-}
--(void)loadRightFinish{
-    self.loadRightView.status = Load_LoadingDone;
-    [NSTimer scheduledTimerWithTimeInterval:self.loadRightView.recoverDelay target:self selector:@selector(animationToNormalTimer:) userInfo:@{TIMER_DURATION : @(self.loadRightView.recoverDuration)} repeats:NO];
 }
 
 #pragma mark - kvc
@@ -225,7 +162,7 @@
         if (self.loadTopView.canAutoLoad) {
             [self loadTop];
         }else{
-            if (!self.loadTopView.isLoading) {
+            if (!self.isLoading) {
                 if (inset.top == CGRectGetHeight(self.loadTopView.frame)) {
                     if (self.loadShouldPause) {
                         self.loadTopView.status = Load_ShouldLoad;
@@ -260,7 +197,7 @@
         if (self.loadBottomView.canAutoLoad) {
             [self loadBottom];
         }else{
-            if (!self.loadBottomView.isLoading) {
+            if (!self.isLoading) {
                 if (inset.bottom == CGRectGetHeight(self.loadBottomView.frame)) {
                     self.loadBottomView.status = Load_ShouldLoad;
                 }else{
@@ -281,7 +218,7 @@
         if (self.loadLeftView.canAutoLoad) {
             [self loadLeft];
         }else{
-            if (!self.loadLeftView.isLoading) {
+            if (!self.isLoading) {
                 if (inset.left == CGRectGetWidth(self.loadLeftView.frame)) {
                     self.loadLeftView.status = Load_ShouldLoad;
                 }else{
@@ -304,7 +241,7 @@
         if (self.loadRightView.canAutoLoad) {
             [self loadRight];
         }else{
-            if (!self.loadRightView.isLoading) {
+            if (!self.isLoading) {
                 if (inset.right == CGRectGetWidth(self.loadRightView.frame)) {
                     self.loadRightView.status = Load_ShouldLoad;
                 }else{
@@ -378,15 +315,79 @@
     return YES;
 }
 
+#pragma mark - loading
+
+-(BOOL)isLoading{
+    return (self.loadTopView && self.loadTopView.isLoading) ||
+    (self.loadBottomView && self.loadBottomView.isLoading) ||
+    (self.loadLeftView && self.loadLeftView.isLoading) ||
+    (self.loadRightView && self.loadRightView.isLoading);
+}
+
+
 #pragma mark - animation
--(void)animationToNormalWithDuration:(double)duration{
+-(void)loadFinishWithLoadView:(LoadView *)loadView{
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(loadView.recoverDelay * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        __weak LoadView *wloadView = loadView;
+        [self animationToNormalWithDuration:loadView.recoverDuration completion:^{
+            wloadView.status = Load_LoadingDone;
+        }];
+    });
+}
+
+-(void)animationToNormalWithDuration:(double)duration completion:(void (^)())completion{
     [UIView animateWithDuration:duration animations:^{
         self.scrollView.contentInset = UIEdgeInsetsZero;
+    } completion:^(BOOL finished) {
+        if (completion) {
+            completion();
+        }
     }];
 }
 
--(void)animationToNormalTimer:(NSTimer *)timer{
-    [self animationToNormalWithDuration:[timer.userInfo[TIMER_DURATION] doubleValue]];
+#pragma mark - loadview
+-(void)setLoadTopView:(LoadView *)loadTopView{
+    if (_loadTopView && [self.scrollView.subviews containsObject:_loadTopView]) {
+        [_loadTopView removeFromSuperview];
+    }
+    _loadTopView = loadTopView;
+    CGRect rect = _loadTopView.frame;
+    rect.origin.y = -rect.size.height;
+    _loadTopView.frame = rect;
+    [self.scrollView addSubview:_loadTopView];
+}
+
+-(void)setLoadBottomView:(LoadView *)loadBottomView{
+    if (_loadBottomView && [self.scrollView.subviews containsObject:_loadBottomView]) {
+        [_loadBottomView removeFromSuperview];
+    }
+    _loadBottomView = loadBottomView;
+    CGRect rect = _loadBottomView.frame;
+    rect.origin.y = self.scrollView.contentSize.height;
+    _loadBottomView.frame = rect;
+    [self.scrollView addSubview:_loadBottomView];
+}
+
+-(void)setLoadLeftView:(LoadView *)loadLeftView{
+    if (_loadLeftView && [self.scrollView.subviews containsObject:_loadLeftView]) {
+        [_loadLeftView removeFromSuperview];
+    }
+    _loadLeftView = loadLeftView;
+    CGRect rect = _loadLeftView.frame;
+    rect.origin.x = -rect.size.width;
+    _loadLeftView.frame = rect;
+    [self.scrollView addSubview:_loadLeftView];
+}
+
+-(void)setLoadRightView:(LoadView *)loadRightView{
+    if (_loadRightView && [self.scrollView.subviews containsObject:_loadRightView]) {
+        [_loadRightView removeFromSuperview];
+    }
+    _loadRightView = loadRightView;
+    CGRect rect = _loadRightView.frame;
+    rect.origin.x = self.scrollView.contentSize.width;
+    _loadRightView.frame = rect;
+    [self.scrollView addSubview:_loadRightView];
 }
 
 @end
