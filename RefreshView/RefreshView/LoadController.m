@@ -26,6 +26,7 @@
     self = [super init];
     if (self) {
         self.scrollView = scrollView;
+        self.normalContentInset = scrollView.contentInset;
         [self.scrollView addObserver:self
                           forKeyPath:@"contentOffset"
                              options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld
