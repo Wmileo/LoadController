@@ -34,10 +34,9 @@ typedef NS_ENUM(NSInteger, Load_Status){
 @property (nonatomic, readonly) UIScrollView *superScrollView;
 
 #pragma mark - 状态
-@property (nonatomic, readonly) BOOL isLoading;
-//yes:当滑动到一定距离时自动加载 no:只有拖动到一定距离时才加载
-@property (nonatomic, assign) BOOL canAutoLoad;
-//是否加载完整  加载完整就不再检测位移
+@property (nonatomic, readonly) BOOL isLoading;//yes:当滑动到一定距离时自动加载 no:只有拖动到一定距离时才加载
+@property (nonatomic, assign) BOOL canAutoLoad;//是否加载完整  加载完整就不再检测位移
+@property (nonatomic, assign) BOOL loadShouldPause;//拉动到一定距离需要手指需要停留一下才能加载 默认NO
 @property (nonatomic, assign) BOOL isLoadComplete;
 
 #pragma mark - 加载完恢复动画时间

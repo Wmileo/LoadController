@@ -28,11 +28,11 @@
 @property (nonatomic, strong) LoadView *loadLeftView;
 @property (nonatomic, strong) LoadView *loadRightView;
 
+@property (nonatomic, readonly) UIScrollView *scrollView;
+
 @property (nonatomic, assign) id<LoadControllerDelegate> delegate;
 
 @property (nonatomic, assign) UIEdgeInsets normalContentInset;//正常状态的contentInset
-
-@property (nonatomic, assign) BOOL loadShouldPause;//拉动到一定距离需要手指需要停留一下才能加载 默认NO
 
 -(instancetype)initWithScrollView:(UIScrollView *)scrollView;
 
