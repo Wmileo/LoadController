@@ -19,6 +19,10 @@
 		7EE9B5DF1B32934A0081B4FD /* LoadView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EE9B5DE1B32934A0081B4FD /* LoadView.m */; };
 		B32F76271DF0113B004481B3 /* LMView.m in Sources */ = {isa = PBXBuildFile; fileRef = B32F76261DF0113B004481B3 /* LMView.m */; };
 		B32F76291DF0518A004481B3 /* LoadController.podspec in Resources */ = {isa = PBXBuildFile; fileRef = B32F76281DF0518A004481B3 /* LoadController.podspec */; };
+		B3D7238D1F94CEA7008AB181 /* LRLConditionHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = B3D723861F94CEA7008AB181 /* LRLConditionHandler.m */; };
+		B3D7238E1F94CEA7008AB181 /* LRLContentHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = B3D723881F94CEA7008AB181 /* LRLContentHandler.m */; };
+		B3D7238F1F94CEA7008AB181 /* LRLFrameHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = B3D7238A1F94CEA7008AB181 /* LRLFrameHandler.m */; };
+		B3D723901F94CEA7008AB181 /* LRLHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = B3D7238C1F94CEA7008AB181 /* LRLHandler.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -54,6 +58,14 @@
 		B32F76251DF0113B004481B3 /* LMView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LMView.h; sourceTree = "<group>"; };
 		B32F76261DF0113B004481B3 /* LMView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LMView.m; sourceTree = "<group>"; };
 		B32F76281DF0518A004481B3 /* LoadController.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LoadController.podspec; sourceTree = "<group>"; };
+		B3D723851F94CEA7008AB181 /* LRLConditionHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LRLConditionHandler.h; path = RefreshView/LRLConditionHandler.h; sourceTree = "<group>"; };
+		B3D723861F94CEA7008AB181 /* LRLConditionHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LRLConditionHandler.m; path = RefreshView/LRLConditionHandler.m; sourceTree = "<group>"; };
+		B3D723871F94CEA7008AB181 /* LRLContentHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LRLContentHandler.h; path = RefreshView/LRLContentHandler.h; sourceTree = "<group>"; };
+		B3D723881F94CEA7008AB181 /* LRLContentHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LRLContentHandler.m; path = RefreshView/LRLContentHandler.m; sourceTree = "<group>"; };
+		B3D723891F94CEA7008AB181 /* LRLFrameHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LRLFrameHandler.h; path = RefreshView/LRLFrameHandler.h; sourceTree = "<group>"; };
+		B3D7238A1F94CEA7008AB181 /* LRLFrameHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LRLFrameHandler.m; path = RefreshView/LRLFrameHandler.m; sourceTree = "<group>"; };
+		B3D7238B1F94CEA7008AB181 /* LRLHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LRLHandler.h; path = RefreshView/LRLHandler.h; sourceTree = "<group>"; };
+		B3D7238C1F94CEA7008AB181 /* LRLHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LRLHandler.m; path = RefreshView/LRLHandler.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -142,12 +154,28 @@
 			children = (
 				7E3FEFF31B297E990003ADD4 /* LoadController.h */,
 				7E3FEFF41B297E990003ADD4 /* LoadController.m */,
+				B37FF3F31F91FC70007CAE7A /* Handler */,
 				7EE9B5DD1B32934A0081B4FD /* LoadView.h */,
 				7EE9B5DE1B32934A0081B4FD /* LoadView.m */,
 				7EB4971F1CAE1DEB00F9B64E /* UIScrollView+Load.h */,
 				7EB497201CAE1DEB00F9B64E /* UIScrollView+Load.m */,
 			);
 			name = RefreshView;
+			sourceTree = "<group>";
+		};
+		B37FF3F31F91FC70007CAE7A /* Handler */ = {
+			isa = PBXGroup;
+			children = (
+				B3D723851F94CEA7008AB181 /* LRLConditionHandler.h */,
+				B3D723861F94CEA7008AB181 /* LRLConditionHandler.m */,
+				B3D723871F94CEA7008AB181 /* LRLContentHandler.h */,
+				B3D723881F94CEA7008AB181 /* LRLContentHandler.m */,
+				B3D723891F94CEA7008AB181 /* LRLFrameHandler.h */,
+				B3D7238A1F94CEA7008AB181 /* LRLFrameHandler.m */,
+				B3D7238B1F94CEA7008AB181 /* LRLHandler.h */,
+				B3D7238C1F94CEA7008AB181 /* LRLHandler.m */,
+			);
+			name = Handler;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -255,10 +283,14 @@
 				7E3FEFCF1B26E6610003ADD4 /* ViewController.m in Sources */,
 				7E3FEFCC1B26E6610003ADD4 /* AppDelegate.m in Sources */,
 				7EE9B5DF1B32934A0081B4FD /* LoadView.m in Sources */,
+				B3D7238F1F94CEA7008AB181 /* LRLFrameHandler.m in Sources */,
 				7E3FEFF51B297E990003ADD4 /* LoadController.m in Sources */,
+				B3D7238E1F94CEA7008AB181 /* LRLContentHandler.m in Sources */,
+				B3D723901F94CEA7008AB181 /* LRLHandler.m in Sources */,
 				7EB497211CAE1DEB00F9B64E /* UIScrollView+Load.m in Sources */,
 				7E3FEFC91B26E6610003ADD4 /* main.m in Sources */,
 				B32F76271DF0113B004481B3 /* LMView.m in Sources */,
+				B3D7238D1F94CEA7008AB181 /* LRLConditionHandler.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

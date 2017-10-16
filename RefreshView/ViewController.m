@@ -17,7 +17,6 @@
 @property (nonatomic, assign) NSInteger num;
 @property (nonatomic, assign) NSInteger firnum;
 
-
 @end
 
 @implementation ViewController
@@ -25,27 +24,21 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.num = 100;
-    self.firnum = 50;
+    self.num = 10;
+    self.firnum = 10;
     self.view.backgroundColor = [UIColor yellowColor];
-    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 50, 320, 400)];
+    self.tableView = [[UITableView alloc] initWithFrame:self.view.frame];
     [self.view addSubview:self.tableView];
+    self.tableView.contentInset = UIEdgeInsetsMake(50, 0, 100, 0);
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
+    self.tableView.tableFooterView = [UIView new];
     [self.tableView reloadData];
     
     [self.tableView setLoadDelegate:self];
     
-//    self.load.loadBottomView = view;
-    LMView *topV = [[LMView alloc] initWithFrame:CGRectMake(0, 0, 320, 40)];
-    topV.tipsLoading = @"加载中";
-    topV.tipsLoadingDone = @"加载完成";
-    topV.tipsPulling = @"下拉加载";
-    topV.tipsShouldLoad = @"松手加载";
-    topV.autoHideTips = YES;
-    topV.canAutoLoad = YES;
-    
-    [self.tableView setLoadTopView:topV];
+//    [self.tableView setLoadTopView:[self createLoadViewX]];
+    [self.tableView setLoadBottomView:[self createLoadViewX]];
 //    self.tableView.loadController.canAutoLoadTop = NO;
 //    self.load.canAutoLoadTop = NO;
 //    [self.load showLoadTop];
@@ -53,6 +46,18 @@
 //    [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(endLoading) userInfo:nil repeats:NO];
 
     // Do any additional setup after loading the view, typically from a nib.
+}
+
+-(LMView *)createLoadViewX{
+    LMView *topV = [[LMView alloc] initWithFrame:CGRectMake(0, 0, 320, 40)];
+    topV.backgroundColor = [UIColor redColor];
+    topV.tipsLoading = @"加载中";
+    topV.tipsLoadingDone = @"加载完成";
+    topV.tipsPulling = @"下拉加载";
+    topV.tipsShouldLoad = @"松手加载";
+    topV.autoHideTips = YES;
+    topV.canAutoLoad = YES;
+    return topV;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -71,13 +76,15 @@
 }
 
 -(void)loadTopFinish:(void (^)(CGFloat))finish withScrollView:(UIScrollView *)scrollView{
-    self.num += 50;
-    self.firnum -= 50;
+//    self.num += 10;
+//    self.firnum -= 10;
     [self.tableView reloadData];
-    
-    if (finish) {
-        finish(50);
-    }
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        if (finish) {
+            finish(0);
+        }
+    });
+
 //    [NSTimer scheduledTimerWithTimeInterval:0 target:self selector:@selector(loadFinish:) userInfo:@{@"finish":finish} repeats:NO];
 }
 //-(void)loadBottomAutoLoadFinish:(void (^)())finish{
@@ -119,7 +126,7 @@
     [self.tableView reloadData];
     
     if (finish) {
-        finish(50);
+        finish(0);
     }
 }
 
