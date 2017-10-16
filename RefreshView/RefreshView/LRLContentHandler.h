@@ -21,7 +21,7 @@
 -(UIEdgeInsets)insetWithOffsetLeft;
 -(UIEdgeInsets)insetWithOffsetRight;
 
--(void)setOffsetWithNewX:(CGFloat)x;
--(void)setOffsetWithNewY:(CGFloat)y;
+//-(void)setOffsetWithNewX:(CGFloat)x;
+//-(void)setOffsetWithNewY:(CGFloat)y;
 
 @end
