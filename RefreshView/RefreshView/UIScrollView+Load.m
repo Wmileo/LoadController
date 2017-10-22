@@ -12,6 +12,19 @@
 @implementation UIScrollView (Load)
 
 static char loadControllerKey;
+static char isLoadController;
+
+-(void)dealloc{
+    NSLog(@"%@",self);
+    if ([self isKindOfClass:NSClassFromString(@"UITableViewWrapperView")]) {
+        return;
+    }
+    
+    if ([objc_getAssociatedObject(self, &isLoadController) boolValue]) {
+//        objc_removeAssociatedObjects(self);
+        self.loadController = nil;
+    }
+}
 
 -(void)setLoadController:(LoadController *)loadController{
     objc_setAssociatedObject(self, &loadControllerKey, loadController, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
@@ -19,9 +32,11 @@ static char loadControllerKey;
 
 -(LoadController *)loadController{
     LoadController *load = objc_getAssociatedObject(self, &loadControllerKey);
-    if (!load) {
+    BOOL isLoad = [objc_getAssociatedObject(self, &isLoadController) boolValue];
+    if (!load && !isLoad) {
         load = [[LoadController alloc] initWithScrollView:self];
         objc_setAssociatedObject(self, &loadControllerKey, load, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+        objc_setAssociatedObject(self, &isLoadController, @(YES), OBJC_ASSOCIATION_ASSIGN);
     }
     return load;
 }

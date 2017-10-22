@@ -21,6 +21,10 @@
 
 @implementation ViewController
 
+-(void)dealloc{
+//    self.tableView.loadController = nil;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -45,7 +49,21 @@
 //    self.load.loadTopView = nil;
 //    [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(endLoading) userInfo:nil repeats:NO];
 
+    
+    UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 100, 100)];
+    button.backgroundColor = [UIColor redColor];
+    [button addTarget:self action:@selector(click) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:button];
+    
+    
     // Do any additional setup after loading the view, typically from a nib.
+}
+
+-(void)click{
+    
+    ViewController *vc = [[ViewController alloc] init];
+    [self.navigationController pushViewController:vc animated:YES];
+    
 }
 
 -(LMView *)createLoadViewX{

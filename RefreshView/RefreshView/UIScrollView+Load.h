@@ -15,9 +15,9 @@
 
 @property (nonatomic, weak) id<LoadControllerDelegate> loadDelegate;
 
-@property (nonatomic, strong) LoadView *loadTopView;
-@property (nonatomic, strong) LoadView *loadBottomView;
-@property (nonatomic, strong) LoadView *loadLeftView;
-@property (nonatomic, strong) LoadView *loadRightView;
+@property (nonatomic, weak) LoadView *loadTopView;
+@property (nonatomic, weak) LoadView *loadBottomView;
+@property (nonatomic, weak) LoadView *loadLeftView;
+@property (nonatomic, weak) LoadView *loadRightView;
 
 @end
