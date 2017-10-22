@@ -13,7 +13,7 @@
 
 @interface LoadController()
 
-@property (nonatomic, weak) UIScrollView *loadScrollView;
+@property (nonatomic, strong) UIScrollView *loadScrollView;
 
 @property (nonatomic, strong) LRLFrameHandler *frameHandler;
 @property (nonatomic, strong) LRLConditionHandler *conditionHandler;
