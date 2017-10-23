@@ -24,7 +24,7 @@
 @implementation LoadController
 
 -(void)dealloc{
-
+    [self clearScrollView:self.scrollView];
 }
 
 -(void)clearScrollView:(UIScrollView *)scrollView{
