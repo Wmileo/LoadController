@@ -2,7 +2,7 @@
 Pod::Spec.new do |s|
 
   s.name         = "LoadController"
-  s.version      = "2.0.3"
+  s.version      = "2.0.4"
   s.summary      = "用于UIScrollView的上拉下拉加载数据"
 
   s.description  = <<-DESC

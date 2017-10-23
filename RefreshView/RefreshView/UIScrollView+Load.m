@@ -15,14 +15,8 @@ static char loadControllerKey;
 static char isLoadController;
 
 -(void)dealloc{
-    NSLog(@"%@",self);
-    if ([self isKindOfClass:NSClassFromString(@"UITableViewWrapperView")]) {
-        return;
-    }
-    
     if ([objc_getAssociatedObject(self, &isLoadController) boolValue]) {
-//        objc_removeAssociatedObjects(self);
-        self.loadController = nil;
+        [self.loadController clearScrollView:self];
     }
 }
 

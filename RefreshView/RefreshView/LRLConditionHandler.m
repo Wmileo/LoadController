@@ -12,6 +12,10 @@
 
 @implementation LRLConditionHandler
 
+-(void)dealloc{
+
+}
+
 -(BOOL)canHandleScrollTop{
     if ([self canHandleScrollWithLoadView:self.loadTopView]) {
         return self.scrollView.contentOffset.y + self.normalContentInset.top < 0;
