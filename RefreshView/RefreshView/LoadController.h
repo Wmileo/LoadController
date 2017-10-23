@@ -41,4 +41,6 @@
 -(void)showLoadTop;
 -(void)disappearLoadTop;
 
+-(void)clearScrollView:(UIScrollView *)scrollView;//如果强引用了该类，需要在dealloc手动释放
+
 @end

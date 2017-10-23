@@ -22,7 +22,7 @@
 @implementation ViewController
 
 -(void)dealloc{
-//    self.tableView.loadController = nil;
+//    [self.tableView.loadController clear];
 }
 
 - (void)viewDidLoad {

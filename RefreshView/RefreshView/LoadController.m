@@ -13,7 +13,7 @@
 
 @interface LoadController()
 
-@property (nonatomic, strong) UIScrollView *loadScrollView;
+@property (nonatomic, weak) UIScrollView *loadScrollView;
 
 @property (nonatomic, strong) LRLFrameHandler *frameHandler;
 @property (nonatomic, strong) LRLConditionHandler *conditionHandler;
@@ -24,8 +24,13 @@
 @implementation LoadController
 
 -(void)dealloc{
-    [self.scrollView removeObserver:self forKeyPath:@"contentOffset"];
-    [self.scrollView.panGestureRecognizer removeTarget:self action:@selector(handleScrollViewDrag:)];
+
+}
+
+-(void)clearScrollView:(UIScrollView *)scrollView{
+    [self.frameHandler clearScrollView:scrollView];
+    [scrollView removeObserver:self forKeyPath:@"contentOffset"];
+    [scrollView.panGestureRecognizer removeTarget:self action:@selector(handleScrollViewDrag:)];
 }
 
 -(instancetype)initWithScrollView:(UIScrollView *)scrollView{

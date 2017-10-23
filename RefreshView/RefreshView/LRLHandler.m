@@ -16,6 +16,10 @@
 
 @implementation LRLHandler
 
+-(void)dealloc{
+
+}
+
 -(instancetype)initWithLoadController:(LoadController *)loadController{
     self = [super init];
     if (self) {

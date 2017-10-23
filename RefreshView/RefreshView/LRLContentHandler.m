@@ -10,6 +10,10 @@
 
 @implementation LRLContentHandler
 
+-(void)dealloc{
+
+}
+
 -(CGFloat)offsetTop{
     return - MAX(-CGRectGetHeight(self.loadTopView.frame), self.scrollView.contentOffset.y + self.normalContentInset.top);
 }

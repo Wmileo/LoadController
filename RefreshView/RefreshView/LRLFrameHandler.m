@@ -11,7 +11,11 @@
 @implementation LRLFrameHandler
 
 -(void)dealloc{
-    [self.scrollView removeObserver:self forKeyPath:@"contentSize"];
+    
+}
+
+-(void)clearScrollView:(UIScrollView *)scrollView{
+    [scrollView removeObserver:self forKeyPath:@"contentSize"];
 }
 
 -(instancetype)initWithLoadController:(LoadController *)loadController{
