@@ -14,11 +14,14 @@
 static char loadControllerKey;
 static char isLoadController;
 
+#warning ios8奔溃
+/*
 -(void)dealloc{
     if ([objc_getAssociatedObject(self, &isLoadController) boolValue]) {
         [self.loadController clearScrollView:self];
     }
 }
+*/
 
 -(void)setLoadController:(LoadController *)loadController{
     objc_setAssociatedObject(self, &loadControllerKey, loadController, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
