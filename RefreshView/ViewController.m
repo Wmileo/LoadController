@@ -89,7 +89,7 @@
 
 #pragma mark - load
 
--(void)loadBottomFinish:(void (^)())finish withScrollView:(UIScrollView *)scrollView{
+-(void)loadBottomFinish:(void (^)(void))finish withScrollView:(UIScrollView *)scrollView{
     [NSTimer scheduledTimerWithTimeInterval:0 target:self selector:@selector(loadFinish:) userInfo:@{@"finish":finish} repeats:NO];
 }
 
