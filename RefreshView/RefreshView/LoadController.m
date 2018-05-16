@@ -74,24 +74,25 @@
 #pragma mark - top
 -(void)loadTop{
     if (!self.isLoading && self.delegate && [self.delegate respondsToSelector:@selector(loadTopFinish:withScrollView:)]) {
-        self.loadTopView.status = Load_Loading;
-        __weak __typeof(self) wself = self;
-//        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.4 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            [self.delegate loadTopFinish:^(CGFloat insetHeight) {
+        self.loadTopView.status = Load_StartLoading;
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            self.loadTopView.status = Load_Loading;
+            __weak __typeof(self) wself = self;
+            [wself.delegate loadTopFinish:^(CGFloat insetHeight) {
                 [wself loadTopFinishWithInsetHeight:insetHeight];
             } withScrollView:wself.scrollView];
-//        });
+        });
     }
 }
 -(void)loadTopFinishWithInsetHeight:(CGFloat)insetHeight{
-    CGFloat top = self.scrollView.contentInset.top;
     if (insetHeight != 0) {
+        CGFloat top = self.scrollView.contentInset.top;
         CGPoint offset = CGPointMake(0,
                                      (top == 0 ?
                                       insetHeight + self.scrollView.contentOffset.y
                                       : insetHeight - top));
-        [self.scrollView setContentOffset:offset];
         self.scrollView.contentInset = self.normalContentInset;
+        [self.scrollView setContentOffset:offset];
         self.loadTopView.status = Load_LoadingDone;
     }else{
         [self loadFinishWithLoadView:self.loadTopView];
@@ -101,11 +102,14 @@
 #pragma mark - bottom
 -(void)loadBottom{
     if (!self.isLoading && self.delegate && [self.delegate respondsToSelector:@selector(loadBottomFinish:withScrollView:)]) {
-        self.loadBottomView.status = Load_Loading;
-        __weak __typeof(self) wself = self;
-        [self.delegate loadBottomFinish:^{
-            [wself loadFinishWithLoadView:wself.loadBottomView];
-        } withScrollView:self.scrollView];
+        self.loadBottomView.status = Load_StartLoading;
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            self.loadBottomView.status = Load_Loading;
+            __weak __typeof(self) wself = self;
+            [self.delegate loadBottomFinish:^{
+                [wself loadFinishWithLoadView:wself.loadBottomView];
+            } withScrollView:self.scrollView];
+        });
     }
 }
 
@@ -124,8 +128,8 @@
     CGFloat left = self.scrollView.contentInset.left;
     if (insetWidth != 0) {
         CGPoint offset = CGPointMake((left == 0 ? insetWidth + self.scrollView.contentOffset.x : insetWidth - left), 0);
-        [self.scrollView setContentOffset:offset];
         self.scrollView.contentInset = self.normalContentInset;
+        [self.scrollView setContentOffset:offset];
         self.loadLeftView.status = Load_LoadingDone;
     }else if (left != 0) {
         [self loadFinishWithLoadView:self.loadLeftView];
@@ -156,7 +160,7 @@
 }
 
 -(void)scrollViewDidScroll{
-
+    
     if ([self.conditionHandler canHandleScrollTop]) {
         //top
         self.loadTopView.offset = [self.contentHandler offsetTop];
@@ -185,7 +189,7 @@
                 }
             }
         }
-        if (inset.top != self.normalContentInset.top) {
+        if (self.scrollView.contentInset.top != inset.top) {
             [UIView animateWithDuration:0.1 animations:^{
                 self.scrollView.contentInset = inset;
             }];
@@ -207,10 +211,14 @@
 //                inset.bottom = self.normalContentInset.bottom;
             }
         }
-        self.scrollView.contentInset = inset;
+        [UIView animateWithDuration:0.1 animations:^{//防止突变
+            self.scrollView.contentInset = inset;
+        }];
     }else if (self.scrollView.contentInset.top != self.normalContentInset.top ||
               self.scrollView.contentInset.bottom != self.normalContentInset.bottom){
-        self.scrollView.contentInset = self.normalContentInset;
+        [UIView animateWithDuration:0.1 animations:^{//防止突变
+            self.scrollView.contentInset = self.normalContentInset;
+        }];
     }
     
     if ([self.conditionHandler canHandleScrollLeft]) {
@@ -292,15 +300,13 @@
 
 #pragma mark - animation
 -(void)loadFinishWithLoadView:(LoadView *)loadView{
+    loadView.status = Load_LoadingDone;
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(loadView.recoverDelay * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        __weak LoadView *wloadView = loadView;
-        [self animationToNormalWithDuration:loadView.recoverDuration completion:^{
-            wloadView.status = Load_LoadingDone;
-        }];
+        [self animationToNormalWithDuration:loadView.recoverDuration completion:nil];
     });
 }
 
--(void)animationToNormalWithDuration:(double)duration completion:(void (^)())completion{
+-(void)animationToNormalWithDuration:(double)duration completion:(void (^)(void))completion{
     [UIView animateWithDuration:duration animations:^{
         self.scrollView.contentInset = self.normalContentInset;
     } completion:^(BOOL finished) {

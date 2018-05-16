@@ -64,7 +64,7 @@
 }
 
 -(BOOL)isLoading{
-    return self.status == Load_Loading;
+    return self.status == Load_Loading || self.status == Load_StartLoading;
 }
 
 #pragma mark -
