@@ -14,10 +14,10 @@
 
 @optional
 -(void)loadTopFinish:(void (^)(CGFloat insetHeight))finish withScrollView:(UIScrollView *)scrollView;
--(void)loadBottomFinish:(void (^)())finish withScrollView:(UIScrollView *)scrollView;
+-(void)loadBottomFinish:(void (^)(void))finish withScrollView:(UIScrollView *)scrollView;
 
 -(void)loadLeftFinish:(void (^)(CGFloat insetWidth))finish withScrollView:(UIScrollView *)scrollView;
--(void)loadRightFinish:(void (^)())finish withScrollView:(UIScrollView *)scrollView;
+-(void)loadRightFinish:(void (^)(void))finish withScrollView:(UIScrollView *)scrollView;
 @end
 
 @interface LoadController : NSObject

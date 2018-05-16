@@ -10,6 +10,7 @@
 
 typedef NS_ENUM(NSInteger, Load_Status){
     Load_Loading = 10,
+    Load_StartLoading,
     Load_LoadingDone,
     Load_Pulling,
     Load_ShouldLoad,
